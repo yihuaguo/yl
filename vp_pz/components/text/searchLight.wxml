@@ -1,0 +1,2 @@
+<!--vp_xx/components/text/searchLight.wxml-->
+<block wx:if="{{texts.length>1}}"><block wx:for="{{texts}}">{{item}}<text wx:if="{{index<(texts.length-1)}}" style="background:#fff664">{{search}}</text></block></block><block wx:else>{{text}}</block>

@@ -1,0 +1,50 @@
+
+<block wx:if="{{main_loaded}}">
+
+    <form bindsubmit="doSave" >
+
+        <view class="pub-box">
+                <view class="pub-box-bd">
+
+                    <view class="weui-cell weui-cell_input" >
+                            <view class="weui-cell__hd">
+                                    手机号
+                            </view>
+                            <view class="weui-cell__bd">
+                                    <input class="weui-input"  name="mobile"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写有效联系方式" value="{{mine.mobile}}"  bindinput="onMobileChange"/>
+                            </view>
+                    </view>
+                </view>
+        </view>
+
+    
+        <!-- 悬浮提交按钮-->
+        <view class="vp-foot">
+                <view style="background:#FFFFFF;padding:20rpx;">
+                        <!--新注册
+                        <view class="xieyi" style="text-align:center">
+                                <text class="is_xieyi {{is_xieyi?'is_xieyi_on':''}}" bindtap="onXieyiChange">我已阅读并同意</text><navigator>《用户协议》</navigator><text>和</text><navigator>《服务协议》</navigator>
+                        </view>
+                        -->
+                        <view>
+                            <block wx:if="{{is_changed}}">
+                                    <button class="btnp"  formType="submit">保存修改</button>
+                            </block>
+                            <block wx:else>
+                                    <button class="btnp btnp-disabled" >修改后保存</button>
+                            </block>
+                        </view>
+                </view>
+        </view>
+        
+
+    </form>
+
+
+</block>
+<block wx:else>
+    <view style="padding:200rpx 0 0 0;text-align:center;" >
+        <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+    </view>
+</block>
+

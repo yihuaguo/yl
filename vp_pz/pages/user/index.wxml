@@ -1,0 +1,202 @@
+<!--vp_timer/pages/index/user.wxml-->
+<block wx:if="{{main_loaded}}">
+
+  <view class="op-cells" style="background-color: #FFFFFF;padding:0 0 60rpx 0;overflow:hidden;text-align:center">
+    <view style="margin-top:40rpx;">
+      <view style="display:inline-block;width:150rpx;height:150rpx;border-radius:200rpx;overflow:hidden;" bindtap="toProfile">
+        <block wx:if="{{mine.avatar}}">
+          <image src="{{mine.avatar_url}}" style="width:150rpx;height:150rpx;" />
+        </block>
+        <block wx:else>
+          <image src="../../resource/images/avatar.jpg" style="width:150rpx;height:150rpx;" />
+        </block>
+      </view>
+    </view>
+    <view style="padding-top:20rpx;">
+      <text class="user-nickname" bindtap="toProfile">{{mine.nickname?mine.nickname:('用户'+mine._id)}}</text>
+      <!--
+                        <block wx:if="{{mine.nickname}}">
+                                <text class="user-nickname" bindtap="updateUserInfo">{{mine.nickname}}</text> 
+                        </block>
+                        <block wx:else>
+                                <button class="btn1m btn1m-plain" bindtap="updateUserInfo">一键授权微信登录</button>
+                        </block>
+                        -->
+    </view>
+  </view>
+
+  <view class="weui-cells op-cells" style="margin-top:20rpx;">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">我的订单</view>
+      <view class="weui-cell__ft"><text bindtap="toOrders" style="font-size:26rpx;">全部</text></view>
+    </view>
+    <view class="weui-cell" style="padding:0">
+      <view class="weui-cell__bd">
+        <view class="data-cell" hover-class="weui-cell_active" bindtap="toOrders" data-filt="10">
+          <view class="data-icon">
+            <image src="../../resource/images/od_10.png" mode="widthFix" />
+          </view>
+          <view class="data-txt">待支付</view>
+          <text wx:if="{{statistic.topays>0}}" class="data-cell-hint data-cell-hint-red">{{statistic.topays}}</text>
+        </view>
+      </view>
+      <view class="weui-cell__bd">
+        <view class="data-cell" hover-class="weui-cell_active" bindtap="toOrders" data-filt="20">
+          <view class="data-icon">
+            <image src="../../resource/images/od_20.png" mode="widthFix" />
+          </view>
+          <view class="data-txt">待服务</view>
+          <text wx:if="{{statistic.todos>0}}" class="data-cell-hint data-cell-hint-red">{{statistic.todos}}</text>
+        </view>
+      </view>
+      <view class="weui-cell__bd">
+        <view class="data-cell" hover-class="weui-cell_active" bindtap="toOrders" data-filt="30">
+          <view class="data-icon">
+            <image src="../../resource/images/od_30.png" mode="widthFix" />
+          </view>
+          <view class="data-txt">已完成</view>
+        </view>
+      </view>
+      <view class="weui-cell__bd">
+        <view class="data-cell" hover-class="weui-cell_active" bindtap="toOrders" data-filt="40">
+          <view class="data-icon">
+            <image src="../../resource/images/od_40.png" mode="widthFix" />
+          </view>
+          <view class="data-txt">已取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells op-cells" style="margin-top:20rpx;">
+
+    <!--
+                <navigator url="../index/web?page=html_qun" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__hd">
+                                <image src="../../resource/images/ic_share.png" style="display:block;margin-right: 20rpx;width:20px; height: 20px;"></image>
+                        </view>
+                        <view class="weui-cell__bd">加个群呗</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </navigator>
+                -->
+
+    <navigator url="../index/clients" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+
+      <view class="weui-cell__hd">
+        <image src="../../resource/images/ic_clients.png" style="display:block;margin-right: 20rpx;width:20px; height: 20px;"></image>
+      </view>
+      <view class="weui-cell__bd">服务对象管理</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+
+    <block wx:if="{{cfg.page_qa}}">
+      <navigator url="{{cfg.page_qa}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+
+        <view class="weui-cell__hd">
+          <image src="../../resource/images/ic_serve.png" style="display:block;margin-right: 20rpx;width:20px; height: 20px;"></image>
+        </view>
+        <view class="weui-cell__bd">问题与客服</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+    </block>
+
+    <!--
+                <button open-type="contact" class="vp-button weui-cell weui-cell_access"  style="text-align:left;padding:40rpx !important;" hover-class="weui-cell_active">
+
+                        <view class="weui-cell__hd">
+                                <image src="../../resource/images/ic_serve.png" style="display:block;margin-right: 20rpx;width:20px; height: 20px;"></image>
+                        </view>
+                        <view class="weui-cell__bd">客服咨询</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </button>
+                -->
+
+    <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="showShareModal">
+
+      <view class="weui-cell__hd">
+        <image src="../../resource/images/ic_share.png" style="display:block;margin-right: 20rpx;width:20px; height: 20px;"></image>
+      </view>
+      <view class="weui-cell__bd">分享转发</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+    <!--
+                <button open-type="feedback" class="vp-button weui-cell weui-cell_access"  style="text-align:left;padding:40rpx !important;" hover-class="weui-cell_active">
+                        <view class="weui-cell__hd">
+                                <image src="../../resource/images/ic_share.png" style="display:block;margin-right: 20rpx;width:20px; height: 20px;"></image>
+                        </view>
+                        <view class="weui-cell__bd">意见反馈</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </button>
+                -->
+  </view>
+
+
+  <block wx:if="{{mine.seller_switch>0 || area.seller_reg>1}}">
+    <view class="weui-cells op-cells" style="margin-top:20rpx;">
+      <navigator url="../user/seller" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+          <image src="../../resource/images/ic_seller.png" style="display:block;margin-right: 20rpx;width:20px; height: 20px;"></image>
+        </view>
+        <view class="weui-cell__bd">推广赚佣金</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+    </view>
+  </block>
+
+  <block>
+    <view class="weui-cells op-cells" style="margin-top:20rpx;">
+      <navigator url="./coupon" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+          <image src="../../resource/images/yhq.png" style="display:block;margin-right: 20rpx;width:20px; height: 20px;"></image>
+        </view>
+        <view class="weui-cell__bd">我的优惠券</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access yhqText">{{statistic.coupon || 0}}张可用</view>
+      </navigator>
+    </view>
+  </block>
+
+  <block wx:if="{{area.staff_reg!=4 || staff}}">
+    <view class="weui-cells op-cells" style="margin-top:20rpx;">
+      <navigator url="../staff/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+          <image src="../../resource/images/ic_staff.png" style="display:block;margin-right: 20rpx;width:20px; height: 20px;"></image>
+        </view>
+        <view class="weui-cell__bd">我是陪护师</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">{{area.name}}</view>
+      </navigator>
+      <!--
+                        <navigator url="../admin/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                                <view class="weui-cell__hd">
+                                        <image src="../../resource/images/ic_staff.png" style="display:block;margin-right: 20rpx;width:20px; height: 20px;"></image>
+                                </view>
+                                <view class="weui-cell__bd">我是管理员</view>
+                                <view class="weui-cell__ft weui-cell__ft_in-access">{{city.name}}</view>
+                        </navigator>
+                        -->
+    </view>
+  </block>
+
+  <!--
+        <block wx:if="{{agents.length>0}}">
+                <div class="weui-cells__title">管理端入口</div>
+                <view class="weui-cells op-cells" style="margin-top:20rpx;">
+                        <block wx:for="{{agents}}">
+                                <navigator url="../agent/index?aid={{item.agent_id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                                        <view class="weui-cell__bd">{{item._agent.name}}</view>
+                                        <view class="weui-cell__ft weui-cell__ft_in-access">管理</view>
+                                </navigator>
+                        </block>
+                </view>
+        </block>
+        -->
+
+  <footer cfg="{{cfg}}" />
+
+  <vpShare shareModal="{{_shareModal}}"></vpShare>
+</block>
+
+<block wx:else>
+  <view style="padding:200rpx 0 0 0;text-align:center;">
+    <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;" />
+  </view>
+</block>

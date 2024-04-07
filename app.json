@@ -1,0 +1,103 @@
+{
+  "pages": [
+    "vp_pz/pages/index/index",
+    "vp_pz/pages/index/areas",
+    "vp_pz/pages/index/search",
+    "vp_pz/pages/index/tag",
+    "vp_pz/pages/index/hospital",
+    "vp_pz/pages/index/service",
+    "vp_pz/pages/index/clients",
+    "vp_pz/pages/order/index",
+    "vp_pz/pages/order/order",
+    "vp_pz/pages/user/index",
+    "vp_pz/pages/user/profile",
+    "vp_pz/pages/user/mobile",
+    "vp_pz/pages/user/outcash",
+    "vp_pz/pages/user/seller",
+    "vp_pz/pages/staff/index",
+    "vp_pz/pages/staff/money",
+    "vp_pz/pages/staff/reg",
+    "vp_pz/pages/staff/profile",
+    "vp_pz/pages/staff/order",
+    "vp_pz/pages/staff/order_check",
+    "vp_pz/pages/staff/orders_client",
+    "vp_pz/pages/index/html",
+    "vp_pz/pages/index/poster",
+    "vp_pz/pages/staff/team",
+    "vp_pz/pages/index/server",
+    "vp_pz/pages/staff/card",
+    "vp_pz/pages/staff/bindacc",
+    "vp_pz/pages/staff/bindacced",
+    "vp_pz/pages/physician/index",
+    "vp_pz/pages/physician/detail",
+    "vp_pz/pages/user/coupon"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于服务定位和导航"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseAddress"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#000",
+    "backgroundColor": "#f5f5f5",
+    "enablePullDownRefresh": false
+  },
+  "usingComponents": {
+    "navBar": "vp_pz/components/navBar/navBar",
+    "footer": "vp_pz/components/footer/footer",
+    "formater": "vp_pz/components/timer/formater",
+    "timer": "vp_pz/components/timer/timer",
+    "clock": "vp_pz/components/timer/clock",
+    "counter": "vp_pz/components/timer/counter",
+    "dtPicker": "vp_pz/components/timer/dtPicker",
+    "vpEditor": "vp_pz/components/editor/vpEditor",
+    "money": "vp_pz/components/money/money",
+    "searchLight": "vp_pz/components/text/searchLight",
+    "textEllipsis": "vp_pz/components/text/textEllipsis",
+    "vpShare": "vp_pz/components/share/share",
+    "vpCoupon": "vp_pz/components/coupon/coupon"
+  },
+  "tabBar": {
+    "color": "#535353",
+    "selectedColor": "#0bb584",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "vp_pz/pages/index/index",
+        "iconPath": "vp_pz/resource/images/tab_index.png",
+        "selectedIconPath": "vp_pz/resource/images/tab_index_seled.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "vp_pz/pages/physician/index",
+        "iconPath": "vp_pz/resource/images/physicianDefault.png",
+        "selectedIconPath": "vp_pz/resource/images/physician.png",
+        "text": "陪诊师"
+      },
+      {
+        "pagePath": "vp_pz/pages/order/index",
+        "iconPath": "vp_pz/resource/images/tab_pub.png",
+        "selectedIconPath": "vp_pz/resource/images/tab_pub_seled.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "vp_pz/pages/user/index",
+        "iconPath": "vp_pz/resource/images/tab_user.png",
+        "selectedIconPath": "vp_pz/resource/images/tab_user_seled.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "plugins": {
+    "routePlan": {
+      "version": "1.0.19",
+      "provider": "wx50b5593e81dd937a"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

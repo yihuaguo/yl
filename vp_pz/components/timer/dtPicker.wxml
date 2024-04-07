@@ -1,0 +1,3 @@
+<picker mode="multiSelector" bindchange="doChange" bindcolumnchange="doColumnChange" value="{{value}}" range="{{range}}">
+    <input disabled="true" placeholder-style="color:#bbbbbb"  placeholder="{{placeholder}}"  value="{{value_text}}" />
+</picker>

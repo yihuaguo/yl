@@ -1,0 +1,216 @@
+<!--vp_pz/pages/staff/team.wxml-->
+<block wx:if="{{main_loaded}}">
+        <view style="background:#FFFFFF;padding:0 20rpx 20rpx 20rpx;">
+
+                <view style="text-align:center;padding:40rpx 0 0 0;">
+                        <image src="../../resource/images/icon_team.png" style="width:150rpx;height:150rpx;"/>
+                </view>
+                
+                <view style="background:#F4F4F4;border-radius:10rpx;padding:30rpx;margin-top:20rpx; "> 
+                        <block wx:for="{{team.staff_team_intro}}">
+                                <view class="text-li">{{item}}</view>
+                        </block>
+                </view>
+
+                <!--
+                <view style="background:#e2ebff;border-radius:10rpx;">
+                        <view class="weui-cell">
+                                <view class="weui-cell__hd">
+                                        <image src="../../resource/images/icon_team.png" style="display:block;width:80rpx;height:80rpx;margin-right:15rpx;"/>
+                                </view>
+                                <view class="weui-cell__bd">
+                                        <view style="color:#2d7aff;font-size:24rpx;">邀请身边的人加入陪护大军，这是一份极具意义和爱心的事业！</view>
+                                        <view style="color:#2d7aff;font-size:24rpx;">您邀请的陪护师会成为您的队员。邀请满5人，即可开启您的团队收益！</view>
+                                        <view style="color:#2d7aff;font-size:24rpx;">开启团队收益后，您的队员每次完成订单，您都可获得收益提成！</view>
+                                </view>
+                        </view>
+                </view>
+                -->
+                
+                <view class="vp-flex" style="margin-top:20rpx;">
+                        <view class="vp-flex_1">
+                                <view style="background:#f5d69c;border-radius:10rpx;margin-right:10rpx;" bindtap="showMasterModal">
+                                        <view class="weui-cell">
+                                                <view class="weui-cell__hd">
+                                                        <image src="../../resource/images/ic_staff_master.png" style="display:block;width:80rpx;height:80rpx;margin-right:30rpx;"/>
+                                                </view>
+                                                <view class="weui-cell__bd">
+                                                        <view style="color:#502a17;font-weight:bold">团长收益</view>
+                                                        <view style="color:#502a17;font-weight:bold">
+                                                                <block wx:if="{{staff.master>0}}">
+                                                                        每单{{area.tax_master}}%
+                                                                </block>
+                                                                <block wx:else>
+                                                                        尚未开启
+                                                                </block>
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </view>
+                        </view>
+                        <view class="vp-flex_1">
+                                <view style="background:#f2e8fe;color:#984de3;border-radius:10rpx;margin-left:10rpx;" bindtap="showInviteModal">
+                                        <view class="weui-cell">
+                                                <view class="weui-cell__hd">
+                                                        <image src="../../resource/images/ic_staff_invite.png" style="display:block;width:80rpx;height:80rpx;margin-right:30rpx;"/>
+                                                </view>
+                                                <view class="weui-cell__bd">
+                                                        <view style="color:#984de3;font-weight:bold">邀请加入</view>
+                                                        <view style="color:#984de3;font-weight:bold">我的团队</view>
+                                                </view>
+                                        </view>
+                                </view>
+                        </view>
+                </view>
+
+
+                
+                <!--
+                <view  class="f5" style="margin:20rpx 0;font-weight:bold;">
+                        我的邀请码
+                </view>
+                <view class="f1" style="font-weight:bold">
+                        {{mine['_uid']}}<text bindtap="doCopy" data-copy="{{mine['_uid']}}">复制</text>
+                </view>
+
+                我是否是团长
+                邀请，邀请码
+                说明
+                -->
+
+                <!--
+                <view style="position:absolute;right:30rpx;top:30rpx">
+                        <view class="f5">总收入：{{mine.coin_in}}元</view>
+                </view>
+                
+
+                <view style="margin-top:60rpx;">
+                        <button bindtap="showOutcashModal"  type="primary" class="btna" style="width:200rpx;">提现</button>
+                </view>
+                -->
+        </view>
+        <!--
+    <view>
+        我的邀请码：{{mine['_uid']}}<text bindtap="doCopy" data-copy="{{mine['_uid']}}">复制</text>
+    </view>
+    -->
+
+    <view class="vp-list-tt" style="margin-top:20rpx;"><text>- 我的团队成员 -</text></view>
+
+    <block wx:if="{{list!=null}}">
+        <view wx:if="{{list!=null && list.length==0}}"  style="padding:40rpx 40rpx 40rpx 40rpx;text-align:center;">
+                <image src="../../resource/images/empty.png" mode="widthFix" style="width:200rpx;"/>
+                <view class="f5" >我还没有队员，快去邀请吧~</view>
+        </view>
+
+        <view wx:else class="weui-cells" style="margin-top:10rpx;">
+                <block wx:for="{{list}}">
+                    <view class="weui-cell" >
+                                <view class="weui-cell__hd">
+                                        <image class="puber-avatar" src="{{item.avatar?item.avatar_url:'../../resource/images/avatar.jpg'}}" mode="aspectFill" style="display:block;width:100rpx;height:100rpx;border-radius:200rpx;margin-right:20rpx;"/>
+                                </view>
+                                <view class="weui-cell__bd">
+                                        <view><text style="font-weight:bold">{{item.nickname}}</text></view>
+                                        <view><text class="f4">注册日期：</text><formater class="f4"  timestamp="{{item.createtime}}"  format="YYYY-MM-dd"></formater></view>
+                                </view>
+                                <view class="weui-cell__ft ">
+                                        <text wx:if="{{item.status!=20}}" style="color:#ffa200;font-size:26rpx;">待审核</text>
+                                </view>
+                        </view>
+                </block>
+        </view>
+        <view hidden="{{!is_loading_more}}" style="padding:40rpx;text-align:center;" >
+                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+        </view>
+        <view hidden="{{more==1}}" class="f5" style="padding:40rpx;text-align:center;">
+                - 没有更多记录了 -
+        </view>
+    </block>
+    <block wx:else>
+        <view style="padding:200rpx 0 0 0;text-align:center;" >
+                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+        </view>
+    </block>
+</block>
+<block wx:else>
+        <view style="padding:200rpx 0 0 0;text-align:center;" >
+                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+        </view>
+</block>
+
+
+
+<view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{_masterModal}}"></view>
+<view class="modal-dialog" wx:if="{{_masterModal}}">
+        <view class="vp-flex"  style="height:100%;flex-direction:column;">
+                <view class="vp-flex_1" bindtap="hideMasterModal"></view>
+                <view>
+                <view class="modal-main" style="background:#F4F4F4">
+                        <view  class="modal-hd">
+                                <text class="modal-hd-title">团队收益奖励</text>
+                                <image class="modal-hd-closer" src="../../resource/images/modal_closer.png" mode="widthFix" bindtap="hideMasterModal"/>
+                        </view>
+                        <view  class="modal-bd" >
+                          
+                                <view class="weui-cells op-cells" style="margin-top:0;">  
+                                        <view class="weui-cell" >
+                                                <view class="weui-cell__bd">我的收益奖励 </view>
+                                                <view class="weui-cell__ft">
+                                                        {{staff.master>0?'已开启':'尚未开启'}}
+                                                </view>
+                                        </view>
+                                        <view class="weui-cell" >
+                                                <view class="weui-cell__bd">当前城市（{{area.name}}）团队长奖励率</view>
+                                                <view class="weui-cell__ft">{{area.tax_master}}%</view>
+                                        </view>
+
+                                        <view class="weui-cell" >
+                                                <view class="weui-cell__bd">
+                                                        <view class="text-li">满足条件后可联系城市管理员开启收益奖励</view>
+                                                        <view class="text-li">开启奖励后，您的队员完成订单，您可获得相应收益奖励</view>
+                                                        <view class="text-li">每单奖励根据订单所发生的城市奖励率计算</view>
+                                                        <view class="text-li">收益奖励自动转入余额，并可在余额账户页面查看记录</view>
+                                                </view>
+                                        </view>
+                                </view>
+
+                        </view>
+                </view>
+                </view>
+        </view>
+</view>
+
+
+<view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{_inviteModal}}"></view>
+<view class="modal-dialog" wx:if="{{_inviteModal}}">
+        <view class="vp-flex"  style="height:100%;flex-direction:column;">
+                <view class="vp-flex_1" bindtap="hideInviteModal"></view>
+                <view>
+                <view class="modal-main" style="background:#F4F4F4">
+                        <view  class="modal-hd">
+                                <text class="modal-hd-title">邀请好友成为陪护师</text>
+                                <image class="modal-hd-closer" src="../../resource/images/modal_closer.png" mode="widthFix" bindtap="hideInviteModal"/>
+                        </view>
+                        <view  class="modal-bd" >
+
+                                <view class="weui-cells op-cells" style="margin-top:0;">  
+                                        <view class="weui-cell">
+                                                <view class="weui-cell__bd">
+                                                        我的邀请码
+                                                </view>
+                                                <view class="weui-cell__ft"> <text class="f2" bindtap="doCopy" data-copy="{{invite_code}}" style="font-weight:bold">{{invite_code}}</text></view>
+                                                <view class="weui-cell__ft"> <button class="btnam" bindtap="doCopy" data-copy="{{invite_code}}" style="margin-left:15rpx;">复制</button></view>
+                                        </view>
+                                        <view class="weui-cell" >
+                                                <view class="weui-cell__bd">
+                                                        <view class="text-li">好友通过您的邀请码注册成为陪护师，即自动加入您的团队</view>
+                                                </view>
+                                        </view>
+                                </view>
+
+                        </view>
+                </view>
+                </view>
+        </view>
+</view>
+

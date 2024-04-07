@@ -1,0 +1,25 @@
+<!--vp_cai/pages/index/citys.wxml-->
+<view class="market-list">
+        <view class="weui-cells">
+                <view class="weui-cell">
+                        <view class="weui-cell__bd">
+                                <text>{{area.name}}</text>
+                        </view>
+                        <view class="weui-cell__ft ">
+                            <button class="btn1m btn1m-disabled">当前</button>
+                        </view>
+                </view>
+                <view wx:for="{{areas}}" wx:if="{{item.id != area.id}}" class="weui-cell">
+                        <view class="weui-cell__bd">
+                                <text>{{item.name}}</text>
+                        </view>
+                        <view class="weui-cell__ft ">
+                            <button class="btn1m" bindtap="switchMarket" data-id="{{item.id}}">切换</button>
+                        </view>
+                </view>
+        </view>
+
+        <view  class="f5" style="padding:40rpx;text-align:center;">
+               - 更多城市即将开通，敬请期待 -
+        </view>
+</view>

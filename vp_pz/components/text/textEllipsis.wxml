@@ -1,0 +1,3 @@
+<!--vp_cai/components/text/textEllipsis.wxml-->
+<text style="-webkit-line-clamp: {{maxLines}};{{(is_ellipsis&&ellipsised)?'word-break: break-all;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;':''}}">{{text}}</text>
+<view wx:if="{{is_ellipsis}}" bindtap="onEllipsisChange" style="padding-top:5rpx;color:#576b95;font-size:30rpx;">{{ellipsised?'全文':'收起'}}</view>

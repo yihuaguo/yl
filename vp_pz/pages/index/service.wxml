@@ -1,0 +1,443 @@
+<!--vp_cai/pages/index/citys.wxml-->
+<!--vp_cai/pages/puber/reg.wxml-->
+<block wx:if="{{main_loaded}}">
+
+
+
+<form bindsubmit="serviceSave" >
+
+        <!--
+        <block wx:if="{{my_staff}}">
+                <view style="position:sticky;top:0;z-index:2;background:#FFFFFF;opacity: 0.9;">
+                <view class="weui-cell staff" style="padding:15rpx 20rpx;">
+                        <view class="weui-cell__hd">
+                                <view class="st-avatar">
+                                        <image src="{{my_staff.avatar_url}}" mode="aspectFill" style="display:block;width:90rpx;height:90rpx;border-radius:200rpx;margin-right:15rpx;"/>
+                                </view>
+                        </view>
+                        <view class="weui-cell__bd">
+                                <view><text class="st-name" style="font-weight:bold;color:#0bb585;">{{my_staff.nickname}}</text></view>
+                                <view style="margin-top:10rpx;opacity: 0.7;font-size:22rpx;">我是您的专属陪护师，欢迎随时咨询</view>
+                        </view>
+                        <view class="weui-cell__ft">
+                                <button class="btn1m btn1m-plain">咨询</button>
+                        </view>
+                </view>
+                </view>
+        </block>
+        -->
+
+        <view class="od-banner">
+                <image class="od-banner-icon" src="../../resource/images/od_bg_icon.png" mode="widthFix"  />
+                <view class="od-jd od-jd-0" >
+                <view class="od-jd-out" >
+                        <view class="od-jd-in"></view>
+                </view>
+                <view class="vp-flex od-jd-text" >
+                        <view class="vp-flex_1">
+                        <text class="od-jd-st-0">填写订单</text>
+                        </view>
+                        <view class="vp-flex_1">
+                        <text class="od-jd-st-10">在线支付</text>
+                        </view>
+                        <view class="vp-flex_1">
+                        <text class="od-jd-st-20">专人服务</text>
+                        </view>
+                        <view class="vp-flex_1">
+                        <text class="od-jd-st-30">服务完成</text>
+                        </view>
+                </view>
+                </view>
+        </view>
+        
+        <view style="position:relative;">
+                <view style="position:absolute;top:-50rpx;padding-bottom:40rpx;left:0;width:100%;">
+                        <view class="pub-box">
+                                <view class="pub-box-bd">
+                                        <view class="weui-cell weui-cell_input">
+                                                <view class="weui-cell__hd">
+                                                        <image class="serv-icon" src="{{service.icon_image?service.icon_image_url:'../../resource/images/avatar.jpg'}}" mode="aspectFill"  />
+                                                </view>
+                                                <view class="weui-cell__bd">
+                                                        <text class="serv-name">{{service.name}}</text>
+                                                </view>
+                                                <view class="weui-cell__ft">
+                                                        <view class="f5 ic_info" bindtap="showServiceModal">服务内容</view>
+                                                </view>
+                                        </view>
+                                        
+                                        <block wx:if="{{my_staff}}">
+                                                <view class="weui-cell weui-cell_input">
+                                                        <view class="weui-cell__hd">
+                                                                <image src="{{my_staff.avatar_url}}" mode="aspectFill" style="display:block;width:50rpx;height:50rpx;border-radius:200rpx;margin:15rpx 15rpx 15rpx 0;"/>
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                                <view><text class="serv-name">{{my_staff.nickname}}</text><tex style="font-size:24rpx;color:#999999;margin-left:5rpx;">本次服务专员</tex><tex style="font-size:24rpx;color:#0bb585;margin-left:5rpx;" bindtap="removeStaff">[重新分配]</tex></view>
+                                                        </view>
+                                                        <view class="weui-cell__ft">
+                                                                <button class="btn1mm btn1mm-plain" bindtap="makePhoneCall" data-tel="{{my_staff.mobile}}">联系</button>
+                                                        </view>
+                                                </view>
+                                        </block>
+                                </view>
+                        </view>
+
+                        <block wx:if="{{service.stype==10 || service.stype==15 ||  service.stype==20}}"><!--到院陪诊，接送陪诊 -->
+                                <view class="pub-box">
+                                        <view class="pub-box-bd">
+
+                                                <view class="weui-cell weui-cell_input">
+                                                        <view class="weui-cell__hd">
+                                                                <view class="weui-label">就诊医院</view>
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                        </view>
+                                                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                                                                <view>
+                                                                        <picker bindchange="onHospitalChange" value="{{hospital_index}}" range="{{hospitals}}" range-key="name">
+                                                                                <input type="text" disabled="true" placeholder="请选择要就诊的医院"  value="{{hospitals[hospital_index].name}}" placeholder-class="vp-placeholder"/>
+                                                                        </picker>
+                                                                </view>
+                                                        </view>
+                                                </view>
+
+                                                <!--
+                                                <view class="weui-cell weui-cell_input">
+                                                        <view class="weui-cell__hd">
+                                                                <view class="weui-label">就诊医院</view>
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                        </view>
+                                                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                                                                <view>
+                                                                {{hospital.name}}
+                                                                </view>
+                                                        </view>
+                                                </view>
+                                                -->
+
+                                                <view class="weui-cell weui-cell_input">
+                                                        <view class="weui-cell__hd">
+                                                                <view class="weui-label">就诊时间</view>
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                        </view>
+                                                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                                                                <view>
+                                                                        <dtPicker bind:dtPickerChanged="onStartTimeChanged" timestamp="{{order.starttime}}" placeholder="请选择就诊时间" ></dtPicker>
+                                                                </view>
+                                                        </view>
+                                                </view>
+
+                                                <view class="weui-cell weui-cell_input" bindtap="onClientChange">
+                                                        <view class="weui-cell__hd">
+                                                                <view class="weui-label">就诊人</view>
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                        </view>
+                                                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                                                                <input class="weui-input" disabled="{{true}}" style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请选择就诊人" value="{{client.name}}" />
+                                                        </view>
+                                                </view>
+                                                <block wx:if="{{service.stype==15}}"><!--接送陪诊 -->
+                                                        <view class="weui-cell weui-cell_input" >
+                                                                <view class="weui-cell__hd">
+                                                                        接送地址
+                                                                </view>
+                                                                <view class="weui-cell__bd">
+                                                                        <input class="weui-input"  name="address"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写就诊人所在地址" value="" />
+                                                                </view>
+                                                        </view>
+                                                </block>
+
+                                                <view class="weui-cell weui-cell_input" >
+                                                        <view class="weui-cell__hd">
+                                                                联系电话
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                                <input class="weui-input" type="number" name="tel"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写您的联系电话" value="" />
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </view>
+                                
+                                <view class="pub-box">
+                                        <view class="pub-box-tt">服务需求</view>
+                                        <view class="pub-box-bd">
+                                                <view class="weui-cell weui-cell_input">
+                                                        <view class="weui-cell__bd">
+                                                                <textarea name="demand" auto-height placeholder="请简单描述您要就诊的科室.." placeholder-class="vp-placeholder"  style="min-height:150rpx" value="" />
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </view>
+                        </block>
+
+                        <block wx:if="{{service.stype==30 || service.stype==40}}"><!--送取结果,代跑取药 -->
+                                <view class="pub-box">
+                                        <view class="pub-box-bd">
+
+                                                <view class="weui-cell weui-cell_input">
+                                                        <view class="weui-cell__hd">
+                                                                <view class="weui-label">所在医院</view>
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                        </view>
+                                                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                                                                <view>
+                                                                        <picker bindchange="onHospitalChange" value="{{hospital_index}}" range="{{hospitals}}" range-key="name">
+                                                                                <input type="text" disabled="true" placeholder="请选择就诊所在医院"  value="{{hospitals[hospital_index].name}}" placeholder-class="vp-placeholder"/>
+                                                                        </picker>
+                                                                </view>
+                                                        </view>
+                                                </view>
+
+                                                <view class="weui-cell weui-cell_input">
+                                                        <view class="weui-cell__hd">
+                                                                <view class="weui-label">服务时间</view>
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                        </view>
+                                                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                                                                <view>
+                                                                        <dtPicker bind:dtPickerChanged="onStartTimeChanged" timestamp="{{order.starttime}}" placeholder="请选择期望服务时间" ></dtPicker>
+                                                                </view>
+                                                        </view>
+                                                </view>
+
+                                                <view class="weui-cell weui-cell_input" bindtap="onAddressChange">
+                                                        <view class="weui-cell__hd">
+                                                                <view class="weui-label">收件信息</view>
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                        </view>
+                                                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                                                                <input class="weui-input" disabled="{{true}}" style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请选择收件信息" value="{{order.address?(order.address.userName+'('+order.address.cityName+order.address.countyName+order.address.detailInfo+')'):''}}" /><!-- {{order.address?(order.address.userName+'('+order.address.telNumber+')'):''}} -->
+                                                        </view>
+                                                </view>
+                                                <view class="weui-cell weui-cell_input" >
+                                                        <view class="weui-cell__hd">
+                                                                联系电话
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                                <input class="weui-input" type="number" name="tel"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写您的联系电话" value="" />
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </view>
+                                
+                                <view class="pub-box">
+                                        <view class="pub-box-tt">服务需求</view>
+                                        <view class="pub-box-bd">
+                                                <view class="weui-cell weui-cell_input">
+                                                        <view class="weui-cell__bd">
+                                                                <textarea name="demand" auto-height placeholder="如有其他服务要求请在此填写.." placeholder-class="vp-placeholder"  style="min-height:150rpx" value="" />
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </view>
+                        </block>
+                         
+                        <block wx:if="{{service.stype==110}}"><!--上门服务 -->
+                                <view class="pub-box">
+                                        <view class="pub-box-bd">
+
+                                                <view class="weui-cell weui-cell_input">
+                                                        <view class="weui-cell__hd">
+                                                                <view class="weui-label">服务时间</view>
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                        </view>
+                                                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                                                                <view>
+                                                                        <dtPicker bind:dtPickerChanged="onStartTimeChanged" timestamp="{{order.starttime}}" placeholder="请选择期望服务时间" ></dtPicker>
+                                                                </view>
+                                                        </view>
+                                                </view>
+
+                                                <view class="weui-cell weui-cell_input" bindtap="onClientChange">
+                                                        <view class="weui-cell__hd">
+                                                                服务对象
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                        </view>
+                                                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                                                                <input class="weui-input" disabled="{{true}}" style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请选择服务对象" value="{{client.name}}" />
+                                                        </view>
+                                                </view>
+                                                <view class="weui-cell weui-cell_input" >
+                                                        <view class="weui-cell__hd">
+                                                                服务地址
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                                <input class="weui-input"  name="address"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写服务所在地址" value="" />
+                                                        </view>
+                                                </view>
+                                                <view class="weui-cell weui-cell_input" >
+                                                        <view class="weui-cell__hd">
+                                                                联系电话
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                                <input class="weui-input" type="number" name="tel"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写您的联系电话" value="" />
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </view>
+                                
+                                <view class="pub-box">
+                                        <view class="pub-box-tt">服务需求</view>
+                                        <view class="pub-box-bd">
+                                                <view class="weui-cell weui-cell_input">
+                                                        <view class="weui-cell__bd">
+                                                                <textarea name="demand" auto-height placeholder="如有其他服务要求请在此填写.." placeholder-class="vp-placeholder"  style="min-height:150rpx" value="" />
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </view>
+                        </block>
+
+                        <block wx:if="{{service.stype==210}}"><!--自定义付费 -->
+                                <view class="pub-box">
+                                        <view class="pub-box-bd">
+
+                                                <view class="weui-cell weui-cell_input" >
+                                                        <view class="weui-cell__hd">
+                                                                支付费用
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                                <input class="weui-input" type="number" name="price"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写支付费用" value="{{order.price}}" bindinput="onPriceChange"/>
+                                                        </view>
+                                                        <view class="weui-cell__ft">
+                                                                元
+                                                        </view>
+                                                </view>
+
+                                                <view class="weui-cell weui-cell_input" >
+                                                        <view class="weui-cell__hd">
+                                                                联系电话
+                                                        </view>
+                                                        <view class="weui-cell__bd">
+                                                                <input class="weui-input" type="number" name="tel"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写您的联系电话" value="" />
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </view>
+                                
+                                <view class="pub-box">
+                                        <view class="pub-box-tt">服务需求</view>
+                                        <view class="pub-box-bd">
+                                                <view class="weui-cell weui-cell_input">
+                                                        <view class="weui-cell__bd">
+                                                                <textarea name="demand" auto-height placeholder="请简单描述您本次服务需求..." placeholder-class="vp-placeholder"  style="min-height:150rpx" value="" />
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </view>
+                        </block>
+
+                        <view style="height:300rpx;"><!--底部占位--></view>
+
+                        <!-- 悬浮提交按钮-->
+                        <view class="vp-foot">
+                                <view style="background:#FFFFFF;padding:20rpx;">
+                                        <view class="xieyi" style="text-align:center">
+                                                <text class="is_xieyi {{is_xieyi?'is_xieyi_on':''}}" bindtap="onXieyiChange">我已阅读并同意</text><navigator url="{{cfg.page_xy}}">《用户协议》</navigator><text>和</text><navigator url="{{cfg.page_fw}}">《服务协议》</navigator>
+                                        </view>
+                                        <view>
+                                                <button class="btnp {{is_xieyi?'':'btnp-disabled'}}"  formType="submit">确认下单<block wx:if="{{order.price>0}}">（支付{{order.price}}元）</block></button>
+                                        </view>
+                                </view>
+                        </view>
+                
+                </view>
+        </view>
+</form>
+
+
+
+
+
+
+
+</block>
+<block wx:else>
+<view style="padding:200rpx 0 0 0;text-align:center;" >
+        <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+</view>
+</block>
+
+
+<!-- 弹窗 - 发布/保存成功
+<view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{_savedModal}}"></view>
+<view class="modal-dialog" wx:if="{{_savedModal}}">
+        <view class="vp-flex"  style="height:100%;flex-direction:column;">
+                <view class="vp-flex_1" ></view>
+                <view>
+                        <view class="modal-main" style="background:#FFFFFF;">
+                                <view  class="modal-bd">
+                                        <view style="text-align:center;padding:60rpx 30rpx 40rpx 30rpx;">
+                                                <view> <icon  type="waiting" size="60"></icon></view>
+                                                <view class="f3" style="margin-top:20rpx;font-weight:bold;">发布成功，审核后即可转发和展示</view>
+                                                <view><text class="f5">审核一般不超过2小时，审核期间可修改</text></view>
+                                                <view style="margin-top:40rpx;"><button class="btnp" bindtap="liveSaved">确定并预览</button></view>
+                                        </view>
+                                </view>
+                        </view>
+                </view>
+        </view>
+</view>
+ -->
+
+
+
+<!-- 弹窗 - 服务详情 -->
+
+    <!-- 弹窗 - 提现 -->
+    <view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{_serviceModal}}"></view>
+    <view class="modal-dialog" wx:if="{{_serviceModal}}">
+            <view class="vp-flex"  style="height:100%;flex-direction:column;">
+                    <view class="vp-flex_1" bindtap="hideServiceModal">
+                    </view>
+                    <view >
+                           <view class="modal-main" style="background:#FFFFFF;">
+                                <view  class="modal-hd">
+                                        <text class="modal-hd-title">{{service.name}}服务内容</text>
+                                        <image class="modal-hd-closer" src="../../resource/images/modal_closer.png" mode="widthFix" bindtap="hideServiceModal"/>
+                                </view>
+                                <view  class="modal-bd" >
+                                        <view style="margin:0 40rpx 40rpx 40rpx;">
+                                                <scroll-view scroll-y="true" style="max-height: 700rpx;">
+                                                        <view>
+                                                                <!--<view style="text-align:center;"><image src="{{service.icon}}" mode="aspectFill" style="width: 150rpx;height:150rpx;;" /></view>-->
+                                                                <view style="background:#fff2e4;border:1rpx solid #ff8400;color:#ff8400;overflow:hidden;padding:30rpx;border-radius:10rpx;">
+                                                                        {{service.info}}
+                                                                </view>
+                                                        </view>
+
+                                                        <!--
+                                                        <view class="weui-cell">
+                                                                <view class="weui-cell__hd">
+                                                                        <image src="{{service.icon}}" mode="aspectFill" style="width: 120rpx;height:120rpx;;" />
+                                                                </view>
+                                                                <view class="weui-cell__bd">
+                                                                        {{service.info}}
+                                                                </view>
+                                                        </view>
+                                                        -->
+
+                                                        <block wx:if="{{service.content}}">
+                                                                <import src="../../resource/js/wxParse/wxParse.wxml"/>
+                                                                <template is="wxParse" data="{{wxParseData:data.nodes}}"/>
+                                                        </block>
+                                                </scroll-view>
+
+                                                <view style="text-align:center;margin-top:30rpx;">
+                                                        <button class="btnp"  bindtap="hideServiceModal">我知道了，开始预约</button>
+                                                </view>
+                                        </view>
+                                </view>
+        
+                           </view>
+                    </view>
+            </view>
+    </view>

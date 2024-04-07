@@ -1,0 +1,56 @@
+<!--vp_pz/pages/staff/team.wxml-->
+<block wx:if="{{main_loaded}}">
+        <view style="padding:40rpx 20rpx 0 20rpx;">
+
+                <view>
+                        <view class="weui-cell">
+                                <view class="weui-cell__hd">
+                                        <image src="../../resource/images/ic_server.png" style="display:block;width:80rpx;height:80rpx;margin-right:20rpx;"/>
+                                </view>
+                                <view class="weui-cell__bd">
+                                        <view style="background:#ecfffa;border:1rpx solid #0bb584;color:#0bb584;padding:20rpx;border-radius: 10rpx;;">
+                                                尊贵的客户您好，欢迎您咨询
+                                        </view>
+                                </view>
+
+                        </view>
+                </view>
+
+
+                <view class="weui-cells op-cells" style="margin-top:40rpx;background:#F4F4F4F4;border-radius:10rpx;overflow:hidden">  
+
+              
+                        <view wx:for="{{tels}}" class="weui-cell">
+                                <view class="weui-cell__hd">
+                                        <image src="../../resource/images/contact-mobile.png" style="display:block;margin-right: 20rpx;width:40px; height: 40px;"></image>
+                                </view>
+                                <view class="weui-cell__bd">
+                                        <view>{{index}}</view>
+                                        <view>{{item}}</view>
+                                </view>
+                                <view class="weui-cell__ft"><button class="btn1m" bindtap="makePhoneCall" data-tel="{{item}}">电话咨询</button></view>
+                        </view>
+
+                        <view class="weui-cell">
+                                <view class="weui-cell__hd">
+                                        <image src="../../resource/images/contact-wx.png" style="display:block;margin-right: 20rpx;width:40px; height: 40px;"></image>
+                                </view>
+                                <view class="weui-cell__bd">
+                                        <view>总部客服</view>
+                                </view>
+                                <view class="weui-cell__ft"><button class="btn1m" open-type="contact">在线咨询</button></view>
+                        </view>
+
+                </view>
+
+                <view bindtap="doCopy" data-copy="{{mine._id}}" class="f4" style="text-align:center;margin:30rpx;">我的UID：{{mine._id}} <text class="color_click">[复制]</text></view>
+
+
+        </view>
+</block>
+<block wx:else>
+        <view style="padding:200rpx 0 0 0;text-align:center;" >
+                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+        </view>
+</block>
+

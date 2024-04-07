@@ -1,0 +1,3 @@
+/* vp_wu/pages/index/html.wxss */
+@import "../../resource/js/wxParse/wxParse.wxss";
+page{background:#FFFFFF;}

@@ -1,0 +1,2 @@
+<!--vp_mai/components/timer/timer.wxml-->
+<text>{{timer}}</text>

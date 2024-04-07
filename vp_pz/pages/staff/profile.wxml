@@ -1,0 +1,83 @@
+<!--vp_pz/pages/staff/profile.wxml-->
+<!--vp_cai/pages/staff/reg.wxml-->
+<block wx:if="{{main_loaded}}">
+
+
+    <!--1.授权获取头像和昵称-->
+    <!--2.填写  姓名，头像，  性别，年龄，电话，    身份证名称，身份证号，身份证，    其他材料证件-->
+
+    <form bindsubmit="staffSave" >
+
+        <view class="pub-box">
+                <view class="pub-box-bd">
+
+                    <view class="weui-cell" >
+                            <view class="weui-cell__hd">
+                                    形象照片
+                            </view>
+                            <view class="weui-cell__bd"></view>
+                            <view class="weui-cell__ft">
+                                    <view class="logo-box" bindtap="onAvatarChange">
+                                            <image  src="{{staff.avatar_file?staff.avatar_file:(staff.avatar?staff.avatar_url:'../../resource/images/pic_add.png')}}"  mode="aspectFit" />
+                                    </view>
+                            </view>
+                    </view>
+                    <view class="weui-cell weui-cell_input" >
+                            <view class="weui-cell__hd">
+                                    展示称呼
+                            </view>
+                            <view class="weui-cell__bd">
+                                    <input class="weui-input"  name="nickname"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="设置您称呼用于服务展示" value="{{staff.nickname}}"  bindinput="onNicknameChange"/>
+                            </view>
+                    </view>
+                    <view class="weui-cell weui-cell_input" >
+                            <view class="weui-cell__hd">
+                                    年龄
+                            </view>
+                            <view class="weui-cell__bd">
+                                    <input class="weui-input" type="number" name="age"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写周岁年龄" value="{{staff.age}}" bindinput="onAgeChange"/>
+                            </view>
+                    </view>
+                    <view class="weui-cell weui-cell_input" >
+                            <view class="weui-cell__hd">
+                                    手机号
+                            </view>
+                            <view class="weui-cell__bd">
+                                    <input class="weui-input" type="number" name="mobile"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写您的手机号" value="{{staff.mobile}}" bindinput="onMobileChange"/>
+                            </view>
+                    </view>
+                    
+                </view>
+        </view>
+
+        
+            <!-- 悬浮提交按钮-->
+            <view class="vp-foot">
+                    <view style="background:#FFFFFF;padding:20rpx;">
+                            <!--新注册
+                            <view class="xieyi" style="text-align:center">
+                                    <text class="is_xieyi {{is_xieyi?'is_xieyi_on':''}}" bindtap="onXieyiChange">我已阅读并同意</text><navigator>《用户协议》</navigator><text>和</text><navigator>《服务协议》</navigator>
+                            </view>
+                            -->
+                            <view>
+                                <block wx:if="{{is_changed}}">
+                                        <button class="btna"  formType="submit">保存修改</button>
+                                </block>
+                                <block wx:else>
+                                        <button class="btna btna-disabled" >修改后保存</button>
+                                </block>
+                            </view>
+                    </view>
+            </view>
+            
+
+    </form>
+
+
+</block>
+<block wx:else>
+<view style="padding:200rpx 0 0 0;text-align:center;" >
+    <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+</view>
+</block>
+

@@ -1,0 +1,6 @@
+<!--vp_timer/components/circle/circle.wxml-->
+<view class='progress_box' > 
+        <canvas class="progress_bg"   canvas-id="canvasProgressbg">  </canvas> 
+        <canvas class="progress_canvas"   canvas-id="canvasProgress">  </canvas> 
+
+</view>

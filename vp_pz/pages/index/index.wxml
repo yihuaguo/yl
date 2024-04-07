@@ -1,0 +1,138 @@
+<!--vp_timer/pages/index/index.wxml-->
+
+<navBar title-text="" isNav="{{false}}" isHeight="{{true}}" background="none" bind:navBarAttached="onNavBarAttached" />
+<view class="headBar" style="background:#ffffff;z-index:2;opacity:{{navOpacity}}">
+  <!-- 因为需要点击，所以z-index:2 超过navBar -->
+  <view class="headStatus" style="height:{{statusHeight}}px;">
+  </view>
+  <view class="headNav" style="height:{{navHeight}}px;line-height:{{navHeight}}px;padding-left:20rpx;">
+
+    <view class="vp-flex">
+      <view><text class="city" bindtap="toAreas">{{area.name}}</text></view>
+      <view class="vp-flex_1" style="overflow:hidden;">
+        <navigator url="../index/search" style="height:{{menu.height}}px;line-height:{{menu.height}}px;margin-top:{{menu.top-statusHeight}}px;margin-left:16px;margin-right:{{menu.width+11}}px;background:#F4F4F4;border-radius:200rpx;text-align:center;">
+          <text class="search-text">找医院</text>
+        </navigator>
+      </view>
+    </view>
+    <!--<text style="font-size:30rpx;font-weight:bold">{{cfg.name}}</text>-->
+  </view>
+</view>
+
+<!--主显示区-->
+<block wx:if="{{main_loaded}}">
+  <block wx:if="{{addmy}}">
+    <view class="weui-cell" style="background:#fff9eb;">
+      <view class="weui-cell__hd">
+        <image src="../../resource/images/ic_myapp.png" style="display:block;width:40rpx;height:40rpx;margin-right:15rpx;" mode="widthFix" />
+      </view>
+      <view class="weui-cell__bd">
+        <text style="color:#be9719;font-size:26rpx;">点击右上角“添加到我的小程序”，方便下次找到！</text>
+      </view>
+      <view class="weui-cell__ft">
+        <image bindtap="closeAddmy" src="../../resource/images/modal_closer.png" style="display:block;width:30rpx;height:30rpx;" mode="widthFix" />
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{my_staff}}">
+    <view style="position:sticky;top:{{navBarHeight}}px;z-index:2;background:#FFFFFF;opacity: 0.9;">
+      <view class="weui-cell staff" style="padding:15rpx 20rpx;">
+        <view class="weui-cell__hd">
+          <view class="st-avatar">
+            <image src="{{my_staff.avatar_url}}" mode="aspectFill" style="display:block;width:90rpx;height:90rpx;border-radius:200rpx;margin-right:15rpx;" />
+          </view>
+        </view>
+        <view class="weui-cell__bd">
+          <view><text class="st-name" style="font-weight:bold;color:#0bb585;">{{my_staff.nickname}}</text></view>
+          <view style="margin-top:10rpx;opacity: 0.7;font-size:22rpx;">我是您服务专员，欢迎随时咨询</view>
+        </view>
+        <view class="weui-cell__ft">
+          <button class="btn1m btn1m-plain" bindtap="makePhoneCall" data-tel="{{my_staff.mobile}}">咨询</button>
+        </view>
+      </view>
+    </view>
+  </block>
+
+
+
+  <view wx:if="{{slides && slides.length>0}}" class="index-swiper">
+    <swiper autoplay="{{true}}" circular="{{true}}" interval="{{4000}}" duration="{{500}}">
+      <block wx:for="{{slides}}">
+        <swiper-item>
+          <image src="{{item.pic_image_url}}" mode="widthFix" show-menu-by-longpress bindtap="onSlideTap" data-index="{{index}}" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <block wx:if="{{nav2s && nav2s.length>0}}">
+    <view class="nav2-list">
+      <block wx:for="{{nav2s}}">
+        <view class="nav2-item" bindtap="onNav2Tap" data-index="{{index}}">
+          <view class="nav2-pic">
+            <image src="{{item.pic_image_url}}" mode="widthFix" />
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+
+  <block wx:if="{{navs && navs.length>0}}">
+    <view class="nav-list">
+      <block wx:for="{{navs}}">
+        <view class="nav-item" bindtap="onNavTap" data-index="{{index}}">
+          <view class="nav-pic">
+            <image src="{{item.pic_image_url}}" mode="aspectFill" />
+          </view>
+          <view class="nav-text" style="color:{{item.tcolor?item.tcolor:''}}">{{item.title}}</view>
+        </view>
+      </block>
+    </view>
+  </block>
+
+
+  <view>
+    <view class="weui-cells hosp-list">
+      <!--医院列表-->
+      <view wx:for="{{hospitals}}" class="weui-cell  hosp-item weui-cell_access" hover-class="weui-cell_active" bindtap="toHospital" data-hid="{{item.id}}">
+        <view class="weui-cell__hd">
+          <image class="hosp-avatar" src="{{item.avatar?item.avatar_url:'../../resource/images/avatar.jpg'}}" mode="aspectFill" />
+        </view>
+        <view class="weui-cell__bd">
+          <view>
+            <text class="hosp-name">{{item.name}}</text>
+          </view>
+          <view class="hosp-line">
+            <text class="hosp-rank">{{item.rank}}</text> <text class="hosp-label">{{item.label}}</text>
+          </view>
+          <view class="hosp-line">
+            <text class="hosp-intro">{{item.intro}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view hidden="{{!is_loading_more}}" style="padding:40rpx;text-align:center;">
+    <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;" />
+  </view>
+
+  <navigator url="../index/server" class="vp-server">
+    <view>
+      <image class="vp-server-icon" src="../../resource/images/ic_server.png" mode="widthFix" />
+    </view>
+    <view><text class="vp-server-text">客服</text></view>
+  </navigator>
+
+  <footer cfg="{{cfg}}" />
+
+  <vpShare shareModal="{{_shareModal}}"></vpShare>
+</block>
+
+<block wx:else>
+  <view style="padding:200rpx 0 0 0;text-align:center;">
+    <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;" />
+  </view>
+</block>
+<vpCoupon couponModal="{{_couponModal}}"></vpCoupon>

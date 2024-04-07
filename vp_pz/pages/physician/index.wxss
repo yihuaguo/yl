@@ -1,0 +1,205 @@
+/* vp_pz/pages/physician/index.wxss */
+.physicianContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 0 40rpx;
+  min-height: 100vh;
+}
+
+view.inputHeader {
+  width: 100vw;
+  padding: 10rpx 40rpx;
+  background: #fff;
+  height: 92rpx;
+  margin-bottom: 20rpx;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.inputBox {
+  width: 100%;
+  background: #F4F4F4;
+  border-radius: 40px;
+  border-radius: 40px;
+  height: 72rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 42rpx;
+  box-sizing: border-box;
+}
+
+.searchImg {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.input {
+  flex: 1;
+  padding-left: 20rpx;
+  height: 72rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #999999;
+}
+
+.tabContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64rpx;
+  width: 100%;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+text.defaultTab {
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #0BB584;
+  padding: 12rpx 24rpx;
+}
+
+text.currentTab {
+  background: #0BB584;
+  border-radius: 36rpx;
+  border-radius: 36rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  padding: 12rpx 24rpx;
+  color: #FFFFFF;
+}
+
+text.request {
+  padding: 12rpx 24rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  background: #F25A65;
+  border-radius: 36rpx;
+  border-radius: 36rpx;
+}
+
+view.physicianListContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 30rpx;
+}
+
+view.card {
+  padding: 30rpx;
+  width: 100%;
+  height: 260rpx;
+  border-radius: 20rpx;
+  background: #FFFFFF;
+  box-sizing: border-box;
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.10);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.avatar {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 20rpx;
+}
+
+view.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 1;
+  gap: 27rpx;
+}
+
+view.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+}
+
+view.usernameBox {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16rpx;
+}
+
+text.name {
+  font-family: PingFangSC-Medium;
+  font-size: 34rpx;
+  color: #333333;
+  font-weight: 600;
+}
+
+view.approve {
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #F25A65;
+  padding: 2rpx 14rpx;
+  border-radius: 19rpx;
+  border: 1px solid #F25A65;
+}
+
+view.addressBox {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8rpx;
+}
+
+image.reserve {
+  background-position: center center;
+  background-size: 100% 100%;
+  position: absolute;
+  width: 68rpx;
+  height: 60rpx;
+  right: 0;
+  top: 0;
+}
+
+text.tag {
+  margin-left: 5rpx;
+  letter-spacing: -4rpx;
+}
+
+image.addressTag {
+  width: 26rpx;
+  height: 26rpx;
+}
+
+text.addressText {
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  color: #999999;
+}
+
+view.description {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 80rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  color: #666666;
+}

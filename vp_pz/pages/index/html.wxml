@@ -1,0 +1,20 @@
+<!--vp_wu/pages/index/html.wxml-->
+<import src="../../resource/js/wxParse/wxParse.wxml"/>
+
+<block wx:if="{{main_loaded}}">
+  <block wx:if="{{server==1}}">
+    <navigator  url="../index/server" class="vp-server">
+            <view><image class="vp-server-icon" src="../../resource/images/ic_server.png" mode="widthFix" /></view>
+            <view><text class="vp-server-text" >客服</text></view>
+    </navigator>
+  </block>
+
+
+  <template is="wxParse" data="{{wxParseData:data.nodes}}"/>
+</block>
+
+<block wx:else>
+  <view style="padding:200rpx 0 0 0;text-align:center;" >
+          <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+  </view>
+</block>   

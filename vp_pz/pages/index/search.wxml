@@ -1,0 +1,78 @@
+<block wx:if="{{main_loaded}}">
+        <view style="background:#0bb584;position:sticky;top:0;left:0;width:100%;z-index:2;overflow:hidden;">
+                <view class="weui-cell" style="background:#FFFFFF;border-radius:200rpx;padding:0;margin: 0 20rpx 20rpx 20rpx;">
+                        <view class="weui-cell__hd" >
+                                <view>
+                                        <image src="../../resource/images/ic_search.png" style="display:block;width:30rpx;height:30rpx;margin:0 30rpx;"/>
+                                </view>
+                        </view>
+                        <view class="weui-cell__bd" >
+                                <input type="text" focus="{{true}}" style="height:80rpx;line-height:80rpx;padding:0;" placeholder="输入医院名称查找"  value="{{searcher}}" placeholder-class="vp-placeholder" confirm-type="search" bindinput="onSearchInput" bindconfirm="doSearch"/>
+                        </view>
+                </view>
+        </view>
+
+        <!----
+        <view style="width:100%;border-bottom:0 none;position:fixed;z-index:2">
+                <view style="background:#FFFFFF;position:relative;">
+                        <view class="h-tab vp-flex">
+                                <view class="h-tab-item vp-flex_1 {{filt==0? 'on' : ''}}" data-filt="0"  bindtap="onFilterChange">全部</view>
+                                <view class="h-tab-item vp-flex_1 {{filt==10 ? 'on' : ''}}" data-filt="10"  bindtap="onFilterChange">待支付</view>
+                                <view class="h-tab-item vp-flex_1 {{filt==20 ? 'on' : ''}}" data-filt="20"  bindtap="onFilterChange">待服务</view>
+                                <view class="h-tab-item vp-flex_1 {{filt==30 ? 'on' : ''}}" data-filt="30"  bindtap="onFilterChange">已完成</view>
+                                <view class="h-tab-item vp-flex_1 {{filt==40 ? 'on' : ''}}" data-filt="40"  bindtap="onFilterChange">已取消</view>
+                        </view>
+                </view>
+        </view>
+        <view style="height:100rpx"></view>
+        -->
+
+        <block wx:if="{{list!=null}}">
+                <view wx:if="{{list!=null && list.length==0}}"  style="padding:40rpx 40rpx 40rpx 40rpx;text-align:center;">
+                        <image src="../../resource/images/empty.png" mode="widthFix" style="width:200rpx;"/>
+                        <view class="f5" >{{city.name}}没有找到该医院，可能尚未开通服务</view>
+                </view>
+                
+                <!--医院查找结果列表-->
+                <view class="weui-cells hosp-list">
+                        <block wx:for="{{list}}">
+                                <view  class="weui-cell  hosp-item weui-cell_access" hover-class="weui-cell_active" bindtap="toHospital" data-hid="{{item.id}}">
+                                        <view class="weui-cell__hd">
+                                                <image class="hosp-avatar" src="{{item.avatar?item.avatar_url:'../../resource/images/avatar.jpg'}}" mode="aspectFill"  />
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                                <view>
+                                                        <text class="hosp-name">{{item.name}}</text>
+                                                </view>
+                                                <view class="hosp-line">
+                                                        <text class="hosp-rank">{{item.rank}}</text> <text class="hosp-label">{{item.label}}</text>
+                                                </view>
+                                                <view class="hosp-line">
+                                                        <text class="hosp-intro">{{item.city}}{{item.district}}{{item.address}}<!--{{item.intro}}--></text>
+                                                </view>
+                                        </view>
+                                </view>
+                        </block>
+                        <view hidden="{{!is_loading_more}}" style="padding:40rpx;text-align:center;" >
+                                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+                        </view>
+                        <!--
+                        <view hidden="{{more==1}}" class="f5" style="padding:40rpx;text-align:center;">
+                                - 已找到以上相关内容 -
+                        </view>
+                        -->
+                </view>
+        </block>
+        <block wx:else>
+                <!--未搜索时-->
+        </block>   
+</block>
+
+<block wx:else>
+        <view style="padding:200rpx 0 0 0;text-align:center;" >
+                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+        </view>
+</block>   
+
+
+

@@ -1,0 +1,12 @@
+<!--vp_pz/pages/staff/bindacc.wxml-->
+<block wx:if="{{binded}}">
+    <view style="text-align:center;padding-top:50rpx;">
+        <view><icon type="success" size="56"></icon></view>
+        <view style="font-size:48rpx;font-weight:bold;margin:30rpx 0">绑定成功</view>
+        <view style="margin:40rpx 0 20rpx 0;">如果还未关注公众号可长按识别关注</view>
+        <view><image show-menu-by-longpress="{{true}}" src="{{cfg.mpappqrcode_url}}" style="width:400rpx;height:400rpx;"/></view>
+        <view style="margin-top:40rpx;">
+            <navigator class="f4 color_click" style="display:inline" open-type="navigateBack">返回</navigator>
+        </view>
+    </view>
+</block>

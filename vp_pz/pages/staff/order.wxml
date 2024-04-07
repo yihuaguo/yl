@@ -1,0 +1,596 @@
+<!--vp_pz/pages/order/order.wxml-->
+
+<!--
+       接受订单  提供服务 服务完成
+
+-->
+
+<block wx:if="{{main_loaded}}">
+<view>
+    <view class="od-banner">
+        <image class="od-banner-icon" src="../../resource/images/od_bg_icon.png" mode="widthFix"  />
+        <view class="od-jd .od-jd-{{order.status}}" >
+            <view class="od-jd-out" >
+                <view class="od-jd-in"></view>
+            </view>
+            <view class="vp-flex od-jd-text" >
+                <view class="vp-flex_1">
+                    <text class="od-jd-st-0">接受订单</text>
+                </view>
+                <view class="vp-flex_1">
+                    <text class="od-jd-st-20">提供服务</text>
+                </view>
+                <view class="vp-flex_1">
+                    <text class="od-jd-st-30">服务完成</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view style="position:relative;">
+        <view style="position:absolute;top:-20rpx;padding-bottom:40rpx;left:0;width:100%;">
+            <view style="background:#FFFFFF;border-radius:20rpx 20rpx 0 0;overflow:hidden;padding:40rpx;">
+                <!--待付款
+                <block wx:if="{{order.status==10}}">
+                    <view><text class="od-st">订单待支付</text></view>
+                    <view class="od-stt">请在<text>00:00:00</text>内完成支付，超时订单自动取消</view>
+                    <view class="od-op" >
+                        <button class="btnp"  bindtap="doPay">立即支付（{{order.to_pay}}元）</button>
+                    </view>
+                </block>
+                -->
+                <!--进行中-->
+                <block wx:if="{{order.status==20}}">
+                        <view><text class="od-st">待服务</text></view>
+                        <view class="od-stt">请与客户联系确认后，按约定时间提供相应服务</view>
+                        <view class="od-stt">完成本单将获得收益<text style="color:#bf7719;font-weight:bold">{{order.profit_fee}}元</text></view>
+                </block>
+                <!--已完成-->
+                <block wx:if="{{order.status==30}}">
+                    <view><text class="od-st">服务已完成</text></view>
+                    <view class="od-stt">辛苦了，感谢您提供的服务</view>
+                    <view class="od-stt">本单收益<text style="color:#bf7719;font-weight:bold">{{order.profit_fee}}元</text>已进入账户余额</view>
+                </block>
+                <!--已取消-->
+                <block wx:if="{{order.status==40}}">
+                    <view><text class="od-st">订单已取消</text></view>
+                    <view class="od-stt">期待下次为您服务，如需帮助可咨询客服</view><!-- TODO一键重新创建 -->
+                    <view class="od-stt">未能获得本单收益{{order.profit_fee}}元</view>
+                </block>
+            </view>
+            
+            <!--本单收入，打卡，取消，完成，联系1，联系2-->
+
+                <block wx:if="{{order.staff_status==10}}">
+
+                        <view class="weui-cells op-cells">
+                                <navigator  class="weui-cell"  url="order_check?oid={{oid}}" >
+                                        <view class="weui-cell__hd"><image src="../../resource/images/ic_check.png"  style="display:block;width:50rpx;height:50rpx;margin-right:15rpx;"/></view>
+                                        <view class="weui-cell__bd"><text>服务记录</text></view>
+                                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                                </navigator>
+                                
+                                <block wx:if="{{order.status==20}}">
+                                        <view class="weui-cell" >
+                                                <view class="weui-cell__bd">
+                                                        <view class="vp-flex">
+                                                                <view class="vp-flex_2"><button type="primary" class="btnwe" style="margin-right:20rpx;" bindtap="doOrderDone">服务完成</button></view>
+                                                                <view class="vp-flex_1"><button class="btnp btnp-warn" bindtap="doOrderCancel">放弃订单</button></view>
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </block>
+                                <!--
+                                <view class="weui-cell">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label od-box-tt">本次服务专员</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                </view>
+                                <view class="weui-cell od-staff">
+                                        <view class="weui-cell__hd">
+                                                <view>
+                                                        <image src="{{order._staff.avatar}}" mode="widthFix" class="od-staff-avatar" />
+                                                </view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                                <view>{{order._staff.nickname}}</view>
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view>
+                                                        <button class="btn1m">电话联系</button>
+                                                </view>
+                                        </view>
+                                </view>
+                                -->
+                        </view>
+                </block>
+
+            <view class="od-box" >
+                <view class="weui-cells">
+                    <view class="weui-cell">
+                            <view class="weui-cell__hd">
+                                    <view class="weui-label od-box-tt">预约信息</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                            </view>
+                    </view>
+                    <view class="weui-cell">
+                            <view class="weui-cell__hd">
+                                    <view class="weui-label">预约服务</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                            </view>
+                            <view class="weui-cell__ft">
+                                    <view>
+                                       {{order.service_name}}
+                                    </view>
+                            </view>
+                    </view>
+                    <block wx:if="{{order.service_stype < 200}}">
+                        <block wx:if="{{order.service_stype <= 20}}">
+                                <view class="weui-cell ">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">就诊医院</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view>
+                                                        {{order.hospital_name}}
+                                                </view>
+                                        </view>
+                                </view>
+                                <view class="weui-cell">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">期望就诊时间</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view>
+                                                        <formater  timestamp="{{order.starttime}}"  format="YYYY-MM-dd hh:mm"></formater>
+                                                </view>
+                                        </view>
+                                </view>
+                                <view class="weui-cell">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">就诊人</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view class="color_click" bindtap="doCopy" data-copy="{{order.client_name}} {{order.client_sex==1?'男':'女'}} {{order.client_age}}周岁">
+                                                {{order.client_name}} {{order.client_sex==1?'男':'女'}} {{order.client_age}}周岁
+                                                </view>
+                                        </view>
+                                </view>
+                                <view class="weui-cell">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">就诊人电话</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view bindtap="makePhoneCall" data-tel="{{order.client_mobile}}">
+                                                {{order.client_mobile}} <text class="color_click">[拨打]</text>
+                                                </view>
+                                        </view>
+                                </view>
+                                <block wx:if="{{order.service_stype == 15}}">
+                                        <view class="weui-cell">
+                                                <view class="weui-cell__hd">
+                                                        <view class="weui-label">接送地址</view>
+                                                </view>
+                                                <view class="weui-cell__bd">
+                                                </view>
+                                                <view class="weui-cell__ft">
+                                                        <view class="color_click" bindtap="doCopy" data-copy="{{order.address.address}}">
+                                                                {{order.address.address}}
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </block>
+                        </block>
+                        <block  wx:if="{{order.service_stype > 20 && order.service_stype < 100}}">
+                                <view class="weui-cell ">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">所在医院</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view>
+                                                        {{order.hospital_name}}
+                                                </view>
+                                        </view>
+                                </view>
+                        
+                                <view class="weui-cell">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">期望处理时间</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view>
+                                                        <formater  timestamp="{{order.starttime}}"  format="YYYY-MM-dd hh:mm"></formater>
+                                                </view>
+                                        </view>
+                                </view>
+                                <view class="weui-cell">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">收件人</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view class="color_click" bindtap="doCopy" data-copy="{{order.address.userName}} {{order.address.telNumber}}">{{order.address.userName}} {{order.address.telNumber}}</view>
+                                        </view>
+                                </view>
+                                <view class="weui-cell">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">收件地址</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view class="color_click" bindtap="doCopy" data-copy="{{order.address.cityName}}{{order.address.countyName}}{{order.address.detailInfo}}">{{order.address.cityName}}{{order.address.countyName}}{{order.address.detailInfo}}</view>
+                                        </view>
+                                </view>
+                                
+                        </block>    
+
+
+                   <block wx:if="{{order.service_stype > 100}}">
+                        <view class="weui-cell">
+                                <view class="weui-cell__hd">
+                                        <view class="weui-label">期望服务时间</view>
+                                </view>
+                                <view class="weui-cell__bd">
+                                </view>
+                                <view class="weui-cell__ft">
+                                        <view>
+                                                <formater  timestamp="{{order.starttime}}"  format="YYYY-MM-dd hh:mm"></formater>
+                                        </view>
+                                </view>
+                        </view>
+                        <view class="weui-cell">
+                                <view class="weui-cell__hd">
+                                        <view class="weui-label">服务对象</view>
+                                </view>
+                                <view class="weui-cell__bd">
+                                </view>
+                                <view class="weui-cell__ft">
+                                        <view>
+                                        {{order.client_name}} {{order.client_sex==1?'男':'女'}} {{order.client_age}}周岁
+                                        </view>
+                                </view>
+                        </view>
+                        <view class="weui-cell">
+                                <view class="weui-cell__hd">
+                                        <view class="weui-label">服务对象电话</view>
+                                </view>
+                                <view class="weui-cell__bd">
+                                </view>
+                                <view class="weui-cell__ft">
+                                        <view>
+                                        {{order.client_mobile}}
+                                        </view>
+                                </view>
+                        </view>
+                
+                        <view class="weui-cell">
+                                <view class="weui-cell__hd">
+                                        <view class="weui-label">服务地址</view>
+                                </view>
+                                <view class="weui-cell__bd">
+                                </view>
+                                <view class="weui-cell__ft">
+                                        <view>
+                                                {{order.address.address}}
+                                        </view>
+                                </view>
+                        </view>
+                   </block>
+                   
+                </block>
+                <block else>
+                        <view class="weui-cell">
+                            <view class="weui-cell__hd">
+                                    <view class="weui-label">支付费用：</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                            </view>
+                            <view class="weui-cell__ft">
+                                    <view>
+                                        <text>{{order.price}}</text>元
+                                    </view>
+                            </view>
+                    </view>
+                </block>
+                
+                    <view class="weui-cell">
+                            <view class="weui-cell__hd">
+                                    <view class="weui-label">其他需求</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                            </view>
+                            <view class="weui-cell__ft">
+                                    <view>
+                                       {{order.demand}}
+                                    </view>
+                            </view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="od-box" >
+                <view class="weui-cells">
+                    <view class="weui-cell">
+                            <view class="weui-cell__hd">
+                                    <view class="weui-label od-box-tt">订单信息</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                            </view>
+                    </view>
+                    <view class="weui-cell">
+                            <view class="weui-cell__hd">
+                                    <view class="weui-label">联系电话</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                            </view>
+                            <view class="weui-cell__ft">
+                                    <view bindtap="makePhoneCall" data-tel="{{order.tel}}">
+                                       {{order.tel}} <text class="color_click">[拨打]</text>
+                                    </view>
+                            </view>
+                    </view>
+                    <view class="weui-cell">
+                            <view class="weui-cell__hd">
+                                    <view class="weui-label">订单编号</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                            </view>
+                            <view class="weui-cell__ft">
+                                    <view class="color_click" bindtap="doCopy" data-copy="{{order.num}}">
+                                       {{order.num}}
+                                    </view>
+                            </view>
+                    </view>
+                    <view class="weui-cell">
+                            <view class="weui-cell__hd">
+                                    <view class="weui-label">下单时间</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                            </view>
+                            <view class="weui-cell__ft">
+                                    <view>
+                                        <formater  timestamp="{{order.createtime}}"  format="YYYY-MM-dd hh:mm"></formater>
+                                    </view>
+                            </view>
+                    </view>
+                    <view class="weui-cell">
+                            <view class="weui-cell__hd">
+                                    <view class="weui-label">应付金额</view>
+                            </view>
+                            <view class="weui-cell__bd">
+                            </view>
+                            <view class="weui-cell__ft">
+                                    <view>
+                                       {{order.to_pay}}元
+                                    </view>
+                            </view>
+                    </view>
+
+                    <block wx:if="{{order.pay_time>0}}">
+                        <view class="weui-cell">
+                                <view class="weui-cell__hd">
+                                        <view class="weui-label">实付金额</view>
+                                </view>
+                                <view class="weui-cell__bd">
+                                </view>
+                                <view class="weui-cell__ft">
+                                        <view>
+                                        {{order.pay}}元
+                                        </view>
+                                </view>
+                        </view>
+                        <view class="weui-cell">
+                                <view class="weui-cell__hd">
+                                        <view class="weui-label">付款时间</view>
+                                </view>
+                                <view class="weui-cell__bd">
+                                </view>
+                                <view class="weui-cell__ft">
+                                        <view>
+                                                <formater  timestamp="{{order.pay_time}}"  format="YYYY-MM-dd hh:mm"></formater>
+                                        </view>
+                                </view>
+                        </view>
+                     </block>
+
+                     <block wx:if="{{order.refund_status>0}}">
+                        <view class="weui-cell">
+                                <view class="weui-cell__hd">
+                                        <view class="weui-label">退款金额</view>
+                                </view>
+                                <view class="weui-cell__bd">
+                                </view>
+                                <view class="weui-cell__ft">
+                                        <view>
+                                        {{order.refund_money}}
+                                        </view>
+                                </view>
+                        </view>
+                        <view class="weui-cell">
+                                <view class="weui-cell__hd">
+                                        <view class="weui-label">退款状态</view>
+                                </view>
+                                <view class="weui-cell__bd">
+                                </view>
+                                <view class="weui-cell__ft">
+                                        <view>
+                                                <block wx:if="{{order.refund_status==1}}">退款中</block>
+                                                <block wx:if="{{order.refund_status==2}}">已退款</block>
+                                                <block wx:if="{{order.refund_status==3}}">退款失败，请联系客服</block>
+                                        </view>
+                                </view>
+                        </view>
+                        <block wx:if="{{order.refund_status==2}}">
+                                <view class="weui-cell">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">退款时间</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view>
+                                                        <formater  timestamp="{{order.refund_time}}"  format="YYYY-MM-dd hh:mm"></formater>
+                                                </view>
+                                        </view>
+                                </view>
+                        </block>
+                     </block>
+
+
+                </view>
+            </view>
+
+                <block wx:if="{{order.status<20 || (order.status==20 && order.staff_status==0)}}">
+                        <view style="padding:40rpx;">
+                                <button class="btnp-opt" bindtap="doCancel">{{order.status < 20?'取消订单':'取消订单并退款'}}</button>
+                        </view>
+                </block>
+                
+        </view>
+    </view>
+</view>
+
+
+</block>
+
+<block wx:else>
+        <view style="padding:200rpx 0 0 0;text-align:center;" >
+                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+        </view>
+</block>   
+
+
+
+<!--
+
+<text bindtap="toOrderCheck">打卡</text>
+                                                <text bindtap="doOrderDone">完成</text>
+                                                <text bindtap="doOrderCancel">弃单</text>
+-->
+<!--
+
+
+                <view>
+                        <view class="weui-cell ">
+                                <view class="weui-cell__hd">
+                                        <view class="weui-label">待服务</view>
+                                </view>
+                                <view class="weui-cell__bd">
+                                </view>
+                                <view class="weui-cell__ft">
+                                        <view>
+                                                <text bindtap="toOrderCheck">打卡</text>
+                                                <text bindtap="doOrderDone">完成</text>
+                                                <text bindtap="doOrderCancel">弃单</text>
+                                        </view>
+                                </view>
+                        </view>
+                </view>
+
+                <view class="pub-box">
+                        <view class="pub-box-bd">
+                                <view class="weui-cell ">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">服务项目</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view>
+                                                    {{order.service_name}}
+                                                </view>
+                                        </view>
+                                </view>
+                                <view class="weui-cell ">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">就诊医院</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view>
+                                                    {{order.hospital_name}}
+                                                </view>
+                                        </view>
+                                </view>
+                                <view class="weui-cell ">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">就诊时间</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view>
+                                                    {{order.starttime}}
+                                                </view>
+                                        </view>
+                                </view>
+                        </view>
+                </view>
+
+
+                <view class="pub-box">
+                        <view class="pub-box-bd">
+
+                                <view class="weui-cell">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">就诊人</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft ">
+                                                <view>{{order.client_name}} {{order.client_sex==1?'男':'女'}} {{order.client_age}}</view>
+                                        </view>
+                                </view>
+                                <view class="weui-cell">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">就诊人电话</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft ">
+                                                <view>{{order.client_mobile}} <text>[拨打]</text></view>
+                                        </view>
+                                </view>
+                                <view class="weui-cell">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">下单人电话</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft ">
+                                                <view>{{order.tel}} <text>[拨打]</text></view>
+                                        </view>
+                                </view>
+                        </view>
+                </view>
+
+
+                <view class="pub-box">
+                        <view class="pub-box-tt">服务需求</view>
+                        <view class="pub-box-bd">
+                                <view class="weui-cell">
+                                    {{order.demand}} 
+                                </view>
+                        </view>
+                </view>
+                
+-->
+

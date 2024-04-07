@@ -1,0 +1,10 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "我的团队",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black",
+  "backgroundColorTop": "#FFFFFF",
+  "usingComponents": {
+          "formater": "../../components/timer/formater"
+  }
+}

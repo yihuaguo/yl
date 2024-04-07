@@ -1,0 +1,8 @@
+/* vp_pz/pages/staff/team.wxss */
+page{background:#F4F4F4;}
+
+.op-cells{margin:20rpx;border-radius:10rpx;overflow:hidden;}
+.op-cells::before{display:none;}
+.op-cells .weui-cell{padding:40rpx}
+.op-cells .weui-cell::before{left:40rpx;}
+.op-cells .weui-cell__bd{font-size:28rpx}

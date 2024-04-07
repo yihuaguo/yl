@@ -1,0 +1,203 @@
+/* vp_pz/components/coupon.wxss */
+
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.couponContainer {
+  height: 640rpx;
+  width: 600rpx;
+  background-color: #fff;
+  border-radius: 40rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 40rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.couponContainer image.icon {
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  bottom: -90rpx;
+}
+
+.couponContainer .mainTitle {
+  font-family: PingFangSC-Medium;
+  font-size: 42rpx;
+  color: #333333;
+  font-weight: 600;
+  margin-bottom: 40rpx;
+}
+
+.couponContainer .card {
+  width: 100%;
+  height: 260rpx;
+  border-radius: 20rpx;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  background-image: linear-gradient(270deg, #09A7AE 0%, #09B783 100%);
+  margin-bottom: 20rpx;
+  border: 1rpx solid rgba(6, 105, 76, 0.30);
+}
+
+.couponContainer .card .cardHeader {
+  height: 190rpx;
+  width: 100%;
+  padding: 30rpx 32rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.couponContainer .card .cardFooter {
+  height: 70rpx;
+  width: 100%;
+  padding: 10rpx 32rpx;
+  background-color: #fff;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.couponContainer .card .cardFooter .cardFooterText {
+  font-family: PingFangSC-Regular;
+  font-size: 19rpx;
+  color: #999999;
+}
+
+.couponContainer .card .cardFooter .btn {
+  padding: 7rpx 20rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  border-radius: 20rpx;
+  color: #FFFFFF;
+  background: #0BB584;
+}
+
+text.toPage {
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #999999;
+  margin-top: 20rpx;
+}
+
+.couponContainer .card .left {
+  width: 130rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 20rpx;
+  border-right: 1px dashed #fff;
+}
+
+.couponContainer .card .left .title {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.couponContainer .card .left .title .tag {
+  font-family: PingFangSC-Semibold;
+  font-size: 34rpx;
+  color: #FFFFFF;
+}
+
+.couponContainer .card .left .title .price {
+  font-family: PingFangSC-Semibold;
+  font-size: 38rpx;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.couponContainer .card .left .label {
+  font-family: PingFangSC-Regular;
+  font-size: 22rpx;
+  color: #FFFFFF;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.couponContainer .card .right {
+  margin-left: 50rpx;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.couponContainer .card .right>.title {
+  font-family: PingFangSC-Medium;
+  font-size: 36rpx;
+  color: #FFFFFF;
+}
+
+.couponContainer .card .header .right>.timeBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.timeTitle {
+  font-family: PingFangSC-Regular;
+  font-size: 22rpx !important;
+  color: #FFFFFF;
+}
+
+.time {
+  font-family: PingFangSC-Medium;
+  font-size: 24rpx;
+  color: #FFFFFF;
+}
+
+view.toCouponBt {
+  width: 100%;
+  background: #0BB584;
+  border-radius: 20rpx;
+  padding: 22rpx 10rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

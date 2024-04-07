@@ -1,0 +1,10 @@
+<!--vp_xx/pages/index/poster.wxml-->
+
+    <view style="padding-top:8%;">
+        <view style="width:640rpx;margin:0 auto;">
+            <view ><canvas  canvas-id="posterCanvas" style="width:640rpx;height: 960rpx;"/></view>
+            <view style="margin-top:20rpx;">
+                <button class="btnp  {{_create_poster_ed?'':btnp-disabled}}" bindtap="savePoster" disabled="{{!_create_poster_ed}}">保存图片到相册去转发</button>
+            </view>
+        </view>
+    </view>

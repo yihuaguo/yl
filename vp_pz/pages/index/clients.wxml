@@ -1,0 +1,83 @@
+<!--vp_cai/pages/index/citys.wxml-->
+<block wx:if="{{main_loaded}}">
+        <view >
+                <view wx:for="{{clients}}" class="cell-box">
+                        <view  class="weui-cell" bindtap="onClientSelected" data-index="{{index}}">
+                                <view class="weui-cell__bd">
+                                        <view><text style="font-weight:bold">{{item.name}}</text></view>
+                                        <view><text class="sext{{item.sex}}">{{item.sex==1?'男':'女'}}</text> <text style="margin-left:10rpx">{{item.age}}周岁</text> <text style="margin-left:10rpx">{{item.mobile}}</text></view>
+                                </view>
+                                <view class="weui-cell__ft ">
+                                        <text wx:if="{{act=='select'}}" style="display:inline-block;padding:15rpx 30rpx;border:1rpx solid #0bb584;color:#0bb584;font-weight:bold;border-radius:10rpx;font-size:28rpx;overflow:hidden">选择</text>
+                                        <text wx:else bindtap="removeClient" data-id="{{item.id}}" style="display:inline-block;padding:15rpx 30rpx;border:1rpx solid #EEEEEE;color:#f13e6d;border-radius:10rpx;font-size:28rpx;overflow:hidden">移除</text>
+                                </view>
+                        </view>
+                </view>
+        </view>
+
+        <!--新增区-->
+        <view class="cell-box">
+                <form bindsubmit="clientSave" >
+                        <view class="weui-cell" bindtap="switchClientAdd">
+                                <view class="weui-cell__bd" style="text-align:center;">
+                                        <text>+ 新增服务对象</text>
+                                </view>
+                        </view>
+                        
+                        <block wx:if="{{isClientAdd}}">
+                                <view class="weui-cell" >
+                                        <view class="weui-cell__hd">
+                                                服务对象姓名
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                                <input class="weui-input" name="name"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写就诊人姓名" value="" />
+                                        </view>
+                                </view>
+
+                                <view class="weui-cell weui-cell_input" >
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">服务对象性别</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft ">
+                                                <text class="sex sex1 {{client.sex==1?'sex1on':''}}" bindtap="onSexChange" data-sex="1">男</text><text class="sex sex2 {{client.sex==2?'sex2on':''}}"  bindtap="onSexChange" data-sex="2">女</text>
+                                        </view>
+                                </view>
+                                <view class="weui-cell weui-cell_input" >
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">服务对象年龄</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                                <input class="weui-input" type="number" name="age"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写周岁年龄" value="" />
+                                        </view>
+                                </view>
+                                <view class="weui-cell weui-cell_input" >
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">服务对象手机</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                                <input class="weui-input" type="number" name="mobile"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="如没有可填监护人手机号" value="" />
+                                        </view>
+                                </view>
+                                <!--
+                                <view class="weui-cell weui-cell_input" >
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">就诊人身份证号</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                                        </view>
+                                </view>
+                                -->
+                                <view class="weui-cell weui-cell_input" >
+                                        <view class="weui-cell__bd">
+                                                <button class="btnp"  formType="submit">确认保存</button>
+                                        </view>
+                                </view>
+                        </block>
+                </form>
+        </view>
+
+</block>

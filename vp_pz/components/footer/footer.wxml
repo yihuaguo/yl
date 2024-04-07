@@ -1,0 +1,15 @@
+<!--vp_wu/components/footer.wxml-->
+<view style="padding:60rpx 0 100rpx 0;text-align:center;">
+        <view>
+            <navigator open-type="switchTab" style="display:inline-block" url="../index/index" ><image src="{{cfg.logob_url}}" mode="heightFix" style="display:block;height:40rpx;" /></navigator>
+        </view>
+        <view>
+                <!--<view class="f6">{{cfg.set_app_slogan}}</view>-->
+                <view class="f6" style="margin-top:10rpx;color:#dddddd;">
+                        <navigator style="display:inline;margin:0 5rpx;font-weight:bold" url="{{cfg.page_xy}}">用户协议</navigator> | 
+                        <navigator style="display:inline;margin:0 5rpx;font-weight:bold" url="{{cfg.page_fw}}">服务协议</navigator> | 
+                        <navigator style="display:inline;margin:0 5rpx;font-weight:bold" url="../../pages/index/server">咨询客服</navigator>
+                </view>
+
+        </view>
+</view>

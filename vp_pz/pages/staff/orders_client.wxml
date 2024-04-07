@@ -1,0 +1,138 @@
+<block wx:if="{{main_loaded}}">
+        <view style="width:100%;border-bottom:0 none;position:fixed;z-index:2">
+                <view style="background:#FFFFFF;position:relative;">
+                        <view class="h-tab vp-flex">
+                                <view class="h-tab-item vp-flex_1 {{filt==0? 'on' : ''}}" data-filt="0"  bindtap="onFilterChange">全部</view>
+                                <!--<view class="h-tab-item vp-flex_1 {{filt==10 ? 'on' : ''}}" data-filt="10"  bindtap="onFilterChange">待支付</view>-->
+                                <view class="h-tab-item vp-flex_1 {{filt==20 ? 'on' : ''}}" data-filt="20"  bindtap="onFilterChange">待服务</view>
+                                <view class="h-tab-item vp-flex_1 {{filt==30 ? 'on' : ''}}" data-filt="30"  bindtap="onFilterChange">已完成</view>
+                                <view class="h-tab-item vp-flex_1 {{filt==40 ? 'on' : ''}}" data-filt="40"  bindtap="onFilterChange">已取消</view>
+                        </view>
+                </view>
+        </view>
+        <view style="height:100rpx"></view>
+
+        <block wx:if="{{list!=null}}">
+                <view wx:if="{{list!=null && list.length==0}}"  style="padding:40rpx;text-align:center;">
+                        <image src="../../resource/images/empty.png" mode="widthFix" style="width:200rpx;"/>
+                        <view class="f5" >暂时没有更多订单~</view>
+                </view>
+                <view wx:else  class="od-list">
+                        <block wx:for="{{list}}">
+                                <view class="od-item" bindtap="toOrder" data-id="{{item.id}}">
+                                        <view class="weui-cell weui-cell_access" >
+                                                <view class="weui-cell__hd" >
+                                                        <view>
+                                                                <image src="{{item.service_logo_image_url}}" mode="widthFix" class="od-logo" style="width:100rpx;height:100rpx;margin-right:20rpx;"/>
+                                                        </view>
+                                                </view>
+                                                <view class="weui-cell__bd" >
+                                                        <view>
+                                                                <view><text style="font-weight:bold">{{item.service_name}}</text></view>
+                                                                <view class="od-info">
+                                                                        <block wx:if="{{item.service_stype < 200}}">
+                                                                                <block wx:if="{{item.service_stype <= 20}}">
+                                                                                        <view><text>{{item.hospital_name}}（{{item.area_name}}）</text></view>
+                                                                                        <view>预约时间：<formater  timestamp="{{item.starttime}}"  format="MM-dd hh:mm"></formater></view>
+                                                                                        <view>就诊人员：<text style="margin-right:5rpx;">{{item.client_sex==1?'男':'女'}}</text><text style="margin-right:5rpx;">{{item.client_age}}周岁</text><text>{{item.client_name}}</text> </view>
+                                                                                        <block wx:if="{{item.service_stype == 15}}">
+                                                                                                <view>接送地址：<text>{{item.address.address}}</text> </view>
+                                                                                        </block>
+                                                                                </block>
+                                                                                <block wx:if="{{item.service_stype > 20 && item.service_stype < 100}}">
+                                                                                        <view><text>{{item.hospital_name}}（{{item.area_name}}）</text></view>
+                                                                                        <view>处理时间：<formater  timestamp="{{item.starttime}}"  format="MM-dd hh:mm"></formater></view>
+                                                                                        <view>收件地址：<text>{{item.address.cityName}}{{item.address.countyName}}{{item.address.detailInfo}}</text> </view>
+                                                                                </block>
+                                                                                <block wx:if="{{item.service_stype > 100}}">
+                                                                                        <view>服务时间：<formater  timestamp="{{item.starttime}}"  format="MM-dd hh:mm"></formater></view>
+                                                                                        <view>服务对象：<text style="margin-right:5rpx;">{{item.client_sex==1?'男':'女'}}</text><text style="margin-right:5rpx;">{{item.client_age}}周岁</text><text>{{item.client_name}}</text> </view>
+                                                                                        <view>服务地址：<text>{{item.address.address}}</text> </view>
+                                                                                </block>
+                                                                        </block>
+                                                                        <block else>
+                                                                                <view>支付费用：<text>{{item.price}}</text>元</view>
+                                                                        </block>
+                                                                        <view wx:if="{{item.demand}}"><text style="color:#ee5253">“{{item.demand}}”</text> </view>
+                                                                </view>
+                                                        </view>
+                                                </view>
+                                                <view class="weui-cell__ft">
+                                                        <!--待付款-->
+                                                        <block wx:if="{{item.status==10}}">
+                                                                <view style="color:#ffa200"><text>待支付</text></view>
+                                                                <view style="color:#ffa200"><text>00:39:33</text></view>
+                                                        </block>
+                                                        <!--进行中-->
+                                                        <block wx:if="{{item.status==20}}">
+                                                                <view style="color:#1da6fd"><text>待服务</text></view>
+                                                        </block>
+                                                        <!--已完成-->
+                                                        <block wx:if="{{item.status==30}}">
+                                                                <view style="color:#21c521"><text>已完成</text></view>
+                                                        </block>
+                                                        <!--已取消-->
+                                                        <block wx:if="{{item.status==40}}">
+                                                                <view style="color:#999999"><text>已取消</text></view>
+                                                        </block>
+                                                </view>
+                                        </view>
+                                </view>
+                        </block>
+                        <view hidden="{{!is_loading_more}}" style="padding:40rpx;text-align:center;" >
+                                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+                        </view>
+                        <view hidden="{{more==1}}" class="f5" style="padding:40rpx;text-align:center;">
+                                - 嗯，目前就这么多 -
+                        </view>
+                </view>
+        </block>
+</block>
+
+<block wx:else>
+        <view style="padding:200rpx 0 0 0;text-align:center;" >
+                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+        </view>
+</block>   
+
+
+
+
+    <!-- 弹窗 - 审核拒绝 -->
+    <view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{_verifyNoModal}}"></view>
+    <view class="modal-dialog" wx:if="{{_verifyNoModal}}">
+            <view class="vp-flex"  style="height:100%;flex-direction:column;">
+                    <view class="vp-flex_1" bindtap="hideVerifyNoModal">
+                    </view>
+                    <view >
+                           <view class="modal-main" style="background:#F4F4F4;">
+                                
+                                <view  class="modal-hd">
+                                        <text class="modal-hd-title">拒绝</text>
+                                        <image class="modal-hd-closer" src="../../resource/images/modal_closer.png" mode="widthFix" bindtap="hideVerifyNoModal"/>
+                                        
+                                </view>
+                                <view  class="modal-bd" >
+                                        <form bindsubmit="doAdminLiveVerifyNo" >
+                                                <view style="padding:0 40rpx 40rpx 40rpx">
+                                                        <view class="weui-cell"  style="background:#FFFFFF;border-radius:10rpx;">
+                                                                <view class="weui-cell__hd">
+                                                                        原因
+                                                                </view>
+                                                                <view class="weui-cell__bd">
+                                                                        <input class="weui-input" name="verify_remark"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="请填写拒绝原因" />
+                                                                </view>
+                                                        </view>
+                                                        <view style="text-align:center;margin-top:30rpx;">
+                                                                <button form-type="submit" class="btn1m">确定拒绝</button>
+                                                        </view>
+                                                </view>
+                                        </form>
+                                </view>
+        
+                           </view>
+                    </view>
+            </view>
+    </view>
+    <!-- 弹窗 - 发布-结束 -->
+

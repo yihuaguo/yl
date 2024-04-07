@@ -1,0 +1,48 @@
+<!--vp_pz/pages/physician/detail.wxml-->
+<view class="physicidanDetaiContainer">
+  <view class="headerBg">
+    <view class="headerBxBox" style="background-image: url({{backgroundImageUrl}})"></view>
+    <view class="infoBox">
+      <view class="avatarContainer">
+        <view class="avatarBox" />
+        <image class="avatar" src="{{userData.avatar_url}}" />
+        <view class="baseInfo">
+          <view class="headerBox">
+            <view class="userBox">
+              <text class="userBoxName">{{userData.nickname}}</text>
+              <view class="approve">实名认证</view>
+            </view>
+            <image class="share" src="../../resource/images/share.png" bindtap="showShareModal" />
+          </view>
+          <image class="tag" src='../../resource/images/avatarAddress.png' />
+          <text class="address" style="margin-right: 30rpx">{{userData.city}}</text>
+          <text class="address">{{calculateDistance(meAddressData.latitude, meAddressData.longitude, userData.latitude, userData.longitude)}}</text>
+        </view>
+      </view>
+      <view class="description">
+        {{userData.desc}}
+      </view>
+    </view>
+  </view>
+  <view class="contentBox">
+    <view class="servicewBox">
+      <text class="contentTitle">服务项目</text>
+      <view class="card" wx:for="{{service || []}}" wx:key="index">
+        <view class="cardHeaderBox">
+          <image class="cardImage" src='{{item.icon_image_url}}' />
+          <view class="cardInfo">
+            <view class="cardTitle">{{item.name}}</view>
+            <view class="cardDescription">{{item.intro}}</view>
+            <view class="cardPriceBox">
+              <text class="cardPrice">{{item.price}}</text>
+              <text class="cardPriceUnit">元 / 次</text>
+            </view>
+          </view>
+        </view>
+        <view class="cardBtn" data-svid="{{item.id}}" bindtap="toService">预约</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<vpShare shareModal="{{_shareModal}}"></vpShare>

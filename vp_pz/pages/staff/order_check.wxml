@@ -1,0 +1,97 @@
+<!--vp_pz/pages/staff/check.wxml-->
+<form bindsubmit="doSave" >
+    <view class="weui-cells check-box" >
+        <view class="weui-cell" >
+            <view class="weui-cell__bd">
+                    <textarea name="content" auto-height placeholder="拍摄服务现场照片或文字记录当前服务进度或备忘（严禁记录客户个人隐私信息）..." maxlength="1000" placeholder-class="vp-placeholder"  style="margin:0;padding:0;min-height:150rpx;font-size:30rpx;" />
+            </view>
+        </view>
+
+        <view class="weui-cell" style="padding:10rpx 30rpx;">
+                <view class="weui-cell__bd">
+                        <view class="images">
+                                <view class="images-item" wx:for="{{images}}"  wx:for-index="idx" >
+                                        <image bindtap="imageRemove" data-idx="{{idx}}" src="{{item.file?item.file:item.url}}" mode="aspectFill" />
+                                </view>
+                                <view class="images-item">
+                                        <image hidden="{{images.length>=9}}" bindtap="imageAdd" src="../../resource/images/pic_add.png" mode="aspectFill" />
+                                </view>
+                        </view> 
+                </view>
+        </view>
+        <view class="weui-cell" style="padding:10rpx 30rpx;">
+                <view class="weui-cell__hd"><image  src="../../resource/images/ic_loc.png" mode="aspectFill" style="display:block;width:30rpx;height:30rpx;"/></view>
+                <view class="weui-cell__bd">
+                        <block wx:if="{{is_posing}}">
+                                正在定位...
+                        </block>
+                        <block wx:else>
+                                <block wx:if="{{postion}}">
+                                        {{postion.address}}
+                                </block>
+                                <block wx:else>
+                                        定位失败，请<text bindtap="toSettings">开启位置信息</text>或<text bindtap="getLocation">点此重试</text>
+                                </block>
+                        </block>
+                </view>
+        </view>
+
+        <view class="weui-cell">
+                <view class="weui-cell__bd">
+                        <view>
+                                <view>
+                                        <button  class="btna" formType="submit">新增服务记录</button>
+                                </view>
+                        </view>
+                </view>
+        </view>
+    </view>
+</form>
+
+
+<view class="weui-cells check-list" >
+        <view class="weui-cell" >
+                <view class="weui-cell__bd" >
+                        <text style="font-weight:bold;">服务记录</text>
+                </view>
+        </view>
+        <block wx:if="{{list!=null}}">
+                <block wx:if="{{list!=null && list.length==0}}" >
+                        <view style="padding:40rpx 40rpx 40rpx 40rpx;text-align:center;">
+                                <image src="../../resource/images/empty.png" mode="widthFix" style="width:200rpx;"/>
+                                <view class="f5" >暂未记录服务进度~</view>
+                        </view>
+                </block>
+                <block wx:else>
+                        <block wx:for="{{list}}">
+                                <view class="weui-cell check-item" >
+                                        <view class="weui-cell__hd">
+                                                <view style="width:120rpx;padding:15rpx 0;border-radius:5rpx;background:#F4F4F4;text-align:center;margin-right:30rpx;">
+                                                        <view><formater  timestamp="{{item.createtime}}"  format="hh:mm" style="font-size:30rpx;font-weight:bold"></formater></view>
+                                                        <view><formater  timestamp="{{item.createtime}}"  format="MM-dd" style="font-size:24rpx;"></formater></view>
+                                                </view>
+                                        </view>
+                                        <view class="weui-cell__bd" >
+                                                <view>
+                                                        <!--<view><formater  timestamp="{{item.createtime}}"  format="MM-dd hh:mm"></formater></view>-->
+                                                        <view class="check_line" style="font-size:32rpx;">{{item.content}}</view>
+                                                        <block wx:if="{{item.images}}">
+                                                                <scroll-view class=" check-images" scroll-x="true"  scroll-with-animation="true" >
+                                                                        <image wx:for="{{item.images}}" wx:for-item="img" wx:for-index="idx" data-idx="{{idx}}" src="{{img.url}}" bindtap="checkImagesView" data-id="{{item.id}}" data-src="{{img.url}}" mode="aspectFill" />
+                                                                </scroll-view>
+                                                        </block>
+                                                        <view>
+                                                                <text class="text-loc">{{item.postion.address}}</text>
+                                                        </view>
+                                                </view>
+                                        </view>
+                                </view>
+                        </block>
+                </block>
+        </block>
+        <block wx:else>
+                <view style="padding:200rpx 0 0 0;text-align:center;" >
+                        <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+                </view>
+        </block>  
+</view>

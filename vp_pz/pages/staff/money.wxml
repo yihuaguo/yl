@@ -1,0 +1,158 @@
+<!--vp_mai/pages/star/follows.wxml-->
+<view  wx:if="{{main_loaded}}">
+        <view style="background:#FFFFFF;text-align:center;padding:40rpx 0 60rpx 0;">
+                <view>
+                        <image src="../../resource/images/icon_wallet.png" style="width:150rpx;height:150rpx;"/>
+                </view>
+                <view  class="f5" style="margin:20rpx 0;font-weight:bold;">
+                        我的账户余额
+                </view>
+                <view class="f1" style="font-weight:bold">
+                        {{staff.money}}元
+                </view>
+
+                <!--
+                <view style="position:absolute;right:30rpx;top:30rpx">
+                        <view class="f5">总收入：{{mine.coin_in}}元</view>
+                </view>
+                -->
+
+                <view style="margin-top:60rpx;">
+                        <button bindtap="toOutcash"  type="primary" class="btnp" style="width:200rpx;">提现</button>
+                </view>
+        </view>
+        <!--
+        <view style="position:absolute;bottom:40rpx;left:0;width:100%;text-align:center;">
+                <view class="f5"><button open-type="contact"  session-from='serv'  class="vp-button" style="display:inline"><text class="f5" style="color:#576b95">有疑问？请联系在线客服 </text></button></view>
+        </view>
+        -->
+
+        <view class="vp-list-tt" style="margin-top:20rpx;"><text>- 我的账户记录 -</text></view>
+
+        <view wx:if="{{list!=null && list.length==0}}"  style="padding:40rpx 40rpx 40rpx 40rpx;text-align:center;">
+                <image src="../../resource/images/empty.png" mode="widthFix" style="width:300rpx;"/>
+                <view class="f5">还没有收支记录~</view>
+        </view>
+        <view wx:else >
+                <view class="weui-cells"  style="margin-top:10rpx;">
+                        <view wx:for="{{list}}" class="weui-cell weui-cell_access">
+                                <view class="weui-cell__bd" >
+                                        <view style="font-weight:bold;color:{{item.money>0?'#09bb07':'#e64340'}}">{{item.money>0?('+'+item.money):item.money}}元</view>
+                                </view>
+                                <view class="weui-cell__ft">
+                                        <view class="f5">{{item.biz_name}}</view>
+                                         <view class="f6"><formater timestamp="{{item.createtime}}" format="YYYY-MM-dd hh:mm:ss"></formater></view>
+                                </view>
+                        </view>
+                </view>
+                <view hidden="{{!is_loading_more}}" style="padding:40rpx;text-align:center;" >
+                  <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+                </view>
+                <view hidden="{{more==1}}" class="f5" style="padding:40rpx;text-align:center;">
+                 - 没有更多记录了 -
+                </view>
+        </view> 
+</view>
+<view wx:else>
+        <view style="padding:200rpx 0 0 0;text-align:center;" >
+                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+        </view>
+</view>
+
+
+
+
+
+    <!-- 弹窗 - 提现 -->
+    <view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{_outcashModal}}"></view>
+    <view class="modal-dialog" wx:if="{{_outcashModal}}">
+            <view class="vp-flex"  style="height:100%;flex-direction:column;">
+                    <view class="vp-flex_1" bindtap="hideOutcashModal">
+                    </view>
+                    <view >
+                           <view class="modal-main" style="background:#F4F4F4;">
+                                <view  class="modal-hd">
+                                        <text class="modal-hd-title">余额提现</text>
+                                        <image class="modal-hd-closer" src="../../resource/images/modal_closer.png" mode="widthFix" bindtap="hideOutcashModal"/>
+                                </view>
+                                <view  class="modal-bd" >
+                                        <form bindsubmit="doOutcash" >
+                                                <view style="margin:0 40rpx 40rpx 40rpx;">
+                                                        <view class="f5" style="margin-bottom:40rpx;text-align:center;">满{{cfg.outcash_min}}元可提现，每次提现需至少间隔{{cfg.outcash_sp}}天</view>
+
+                                                        <view class="weui-cells" style="margin-top:0">
+
+                                                                <view class="weui-cell">
+                                                                        <view class="weui-cell__hd">提现金额</view>
+                                                                        <view class="weui-cell__bd">
+                                                                                <input class="weui-input" type="digit" name="money"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="{{cfg.outcash_min}}~{{cfg.outcash_max}}" value="{{staff.money}}" />
+                                                                        </view>
+                                                                        <div class="weui-cell__ft">元</div>
+                                                                </view>
+                                                                
+                                                                <block wx:if="{{cfg.outcash_channel=='wx'}}"><!--微信号转账-->
+                                                                        <view class="weui-cell">
+                                                                                <view class="weui-cell__hd">收款微信账号</view>
+                                                                                <view class="weui-cell__bd">
+                                                                                        <input class="weui-input" name="account"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="您的微信号" />
+                                                                                </view>
+                                                                                <div class="weui-cell__ft"></div>
+                                                                        </view>
+                                                                </block>
+
+                                                                <block wx:if="{{cfg.outcash_channel=='ali'}}"><!--支付宝账号转账-->
+                                                                        <view class="weui-cell">
+                                                                                <view class="weui-cell__hd">收款支付宝账号</view>
+                                                                                <view class="weui-cell__bd">
+                                                                                        <input class="weui-input" name="account"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="您的支付宝账号" />
+                                                                                </view>
+                                                                                <div class="weui-cell__ft"></div>
+                                                                        </view>
+                                                                </block>
+
+                                                                <block wx:if="{{cfg.outcash_channel=='bank'}}"><!--银行账号转账-->
+                                                                        <view class="weui-cell">
+                                                                                <view class="weui-cell__hd">开户银行</view>
+                                                                                <view class="weui-cell__bd">
+                                                                                        <input class="weui-input" name="name"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="您的开户银行" />
+                                                                                </view>
+                                                                                <div class="weui-cell__ft"></div>
+                                                                        </view>
+                                                                        <view class="weui-cell">
+                                                                                <view class="weui-cell__hd">银行卡号</view>
+                                                                                <view class="weui-cell__bd">
+                                                                                        <input class="weui-input" name="account"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="您的收款银行卡号" />
+                                                                                </view>
+                                                                                <div class="weui-cell__ft"></div>
+                                                                        </view>
+                                                                </block>
+                                                                
+
+                                                                <view class="weui-cell">
+                                                                        <view class="weui-cell__hd">真实姓名</view>
+                                                                        <view class="weui-cell__bd">
+                                                                                <input class="weui-input" name="realname"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="收款账户绑定的姓名" />
+                                                                        </view>
+                                                                </view>
+                                                                <view class="weui-cell">
+                                                                        <view class="weui-cell__hd">手机号码</view>
+                                                                        <view class="weui-cell__bd">
+                                                                                <input class="weui-input" type="number" name="mobile"  style="text-align:right" placeholder-class="vp-placeholder"  placeholder="提现遇到问题时联系您" />
+                                                                        </view>
+                                                                </view>
+                                                        </view>
+                                                        
+                                                        <view class="f5" style="margin-top:30rpx;text-align:center;color:#2d7aff">提现金额将在审核通过后转入您的账户</view>
+
+                                                        <view style="text-align:center;margin-top:30rpx;">
+                                                                <button class="btna" form-type="submit" >确认提现</button>
+                                                        </view>
+                                                </view>
+                                        </form>
+                                </view>
+        
+                           </view>
+                    </view>
+            </view>
+    </view>
+    <!-- 弹窗 - 发布-结束 -->

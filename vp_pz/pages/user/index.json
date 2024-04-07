@@ -1,0 +1,7 @@
+{
+        "enablePullDownRefresh": false,
+        "navigationBarTitleText": "我的",
+        "navigationBarBackgroundColor": "#FFFFFF",
+        "navigationBarTextStyle": "black",
+        "backgroundColorTop": "#FFFFFF"
+}

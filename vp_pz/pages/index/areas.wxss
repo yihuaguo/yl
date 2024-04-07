@@ -1,0 +1,5 @@
+/* vp_cai/pages/index/markets.wxss */
+page{background:#F4F4F4;}
+.weui-cells{margin:0;}
+.weui-cell{padding:40rpx;}
+.weui-cell__bd{font-size:30rpx;font-weight:bold}

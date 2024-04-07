@@ -1,0 +1,59 @@
+<!--vp_pz/pages/staff/card.wxml-->
+<block wx:if="{{main_loaded}}">
+    <view style="background:#FFFFFF;border-radius:10rpx;margin:30rpx 30rpx 0 30rpx;">
+        <view class="weui-cell staff" style="padding:15rpx 20rpx;">
+                <view class="weui-cell__hd">
+                        <view class="st-avatar">
+                                <image src="{{staff.avatar_url}}" mode="aspectFill" style="display:block;width:90rpx;height:90rpx;border-radius:200rpx;margin-right:15rpx;"/>
+                        </view>
+                </view>
+                <view class="weui-cell__bd">
+                        <view><text class="st-name" style="font-weight:bold;color:#0bb585;">{{staff.nickname}}</text></view>
+                        <view style="margin-top:10rpx;opacity: 0.7;font-size:22rpx;">我是您服务专员，欢迎随时咨询</view>
+                </view>
+                <view class="weui-cell__ft">
+                        <button class="btn1m btn1m-plain" >咨询</button>
+                </view>
+        </view>
+    </view>
+    <view style="margin:0 36rpx;">
+        <image src="../../resource/images/card-bg.png" style="width:100%;" mode="widthFix"/>
+    </view>
+
+    <view style="margin:30rpx;background:#ecf3fe;border-radius:10rpx;">
+        
+
+        <view class="weui-cell" >
+                <view class="weui-cell__hd">
+                        <view class="st-avatar">
+                                <image src="../../resource/images/ic_users.png" mode="aspectFill" style="display:block;width:30rpx;height:30rpx;margin-right:15rpx;"/>
+                        </view>
+                </view>
+                <view class="weui-cell__bd">
+                    <text > 我的服务名片已覆盖</text>
+                </view>
+                <view class="weui-cell__ft">
+                        <text style="color:#2d7aff;font-weight:bold">{{users}}位客户</text>
+                </view>
+        </view>
+        <view class="weui-cell" >
+                <view class="weui-cell__bd">
+                    <text class="f5">通过我分享的名片或我服务过的客户在打开{{cfg.name}}时，首页顶部会悬浮展示我的名片，方便客户快速联系。且客户下单时，会直接由我接单服务。</text>
+                </view>
+        </view>
+        <view class="weui-cell" >
+                <view class="weui-cell__bd">
+                    <button class="btna" bindtap="showShareModal">分享我的名片</button>
+                </view>
+        </view>
+        
+    </view>
+
+    <vpShare shareModal="{{_shareModal}}"></vpShare>
+</block>
+
+<block wx:else>
+        <view style="padding:200rpx 0 0 0;text-align:center;" >
+                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+        </view>
+</block>   

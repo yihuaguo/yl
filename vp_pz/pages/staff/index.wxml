@@ -1,0 +1,276 @@
+<!--vp_timer/pages/index/user.wxml-->
+<block wx:if="{{main_loaded}}">
+        <block wx:if="{{!staff.acopenid}}">
+                <navigator  class="weui-cell" style="padding:20rpx;background:#fff9eb;"  url="bindacc">
+                        <view class="weui-cell__hd" >
+                                <image src="../../resource/images/bell.png" style="display:block;width:34rpx;height:34rpx;margin-right:15rpx;" mode="widthFix"/>
+                        </view>
+                        <view class="weui-cell__bd" >
+                        <text style="color:#be9719;font-size:26rpx;">请绑定公众号以便接收消息提醒</text>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access">
+                                绑定
+                        </view>
+                </navigator>
+        </block>
+
+        <view class="st-banner">
+                <view class="weui-cells"  style="margin:0;background:#2d7aff;" >
+
+                        <view class="weui-cell staff" bindtap="toProfile">
+                                <view class="weui-cell__hd">
+                                        <view class="st-avatar">
+                                                <image src="{{staff.avatar_url}}" mode="aspectFill"/>
+                                        </view>
+                                </view>
+                                <view class="weui-cell__bd">
+                                        <view><text class="st-name">{{staff.nickname}}</text></view>
+                                        <view style="margin-top:10rpx;opacity: 0.7;">{{staff.mobile}}</view>
+                                </view>
+                                <view class="weui-cell__ft">
+                                        <image src="../../resource/images/ic_settings.png"  style="width:40rpx;height:40rpx;"/>
+                                </view>
+                        </view>
+
+                        <navigator wx:if="{{area.staff_card==1}}" class="weui-cell func"  url="card" >
+                                <view class="weui-cell__hd"><image src="../../resource/images/ic_card.png" /></view>
+                                <view class="weui-cell__bd">
+                                        <view>名片</view>
+                                </view>
+                                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+
+                        <navigator class="weui-cell func" url="money">
+                                <view class="weui-cell__hd"><image src="../../resource/images/ic_money.png" /></view>
+                                <view class="weui-cell__bd">
+                                        <view>余额</view>
+                                </view>
+                                <view class="weui-cell__ft weui-cell__ft_in-access">{{staff.money}}元</view>
+                        </navigator>
+                        <navigator wx:if="{{area.staff_team==2}}" class="weui-cell func"  url="team">
+                                <view class="weui-cell__hd"><image src="../../resource/images/ic_team.png" /></view>
+                                <view class="weui-cell__bd">团队</view>
+                                <view class="weui-cell__ft weui-cell__ft_in-access">{{staff.subs}}人</view>
+                        </navigator>
+                </view>
+        </view>
+
+        <!--
+        <view  class="op-cells" style="background-color: #FFFFFF;padding:0 0 60rpx 0;overflow:hidden;text-align:center">
+                <view style="margin-top:40rpx;">
+
+                </view>
+                <view style="padding-top:20rpx;">
+                        
+                        <block wx:if="{{mine.nickname}}">
+                                <text style="font-weight:bold;margin:0 5rpx 0 50rpx;" bindtap="toAuth">{{mine.nickname}}</text> 
+                                <text class="color_click" bindtap="updateUserInfo">更新</text>
+                                
+                        </block>
+                        <block wx:else>
+                                <button class="vp-button color_click" open-type="getUserInfo" bindgetuserinfo="updateUserInfo">一键授权微信登录</button>
+                        </block>
+                </view>
+        </view>
+        -->
+        <!--
+        <view class="weui-cells op-cells" style="margin-top:20rpx;" >  
+                <navigator class="weui-cell" url="money">
+                        <view class="weui-cell__bd">
+                                <view>余额：{{staff.money}}元</view>
+                        </view>
+                        <view class="weui-cell__ft"></view>
+                </navigator>
+                <navigator wx:if="{{city.staff_team==2}}" class="weui-cell weui-cell_access"  hover-class="weui-cell_active" url="team">
+                        <view class="weui-cell__bd">团队</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </navigator>
+        </view>
+        -->
+
+        <view style="position:relative;">
+                <view style="position:absolute;top:-50rpx;padding-bottom:40rpx;left:0;width:100%;">
+                        <view class="weui-cells op-cells" style="margin-top:20rpx;">  
+                                <view class="weui-cell">
+                                        <view class="weui-cell__bd">我的订单</view>
+                                        <view class="weui-cell__ft"><navigator  url="orders_client" style="font-size:26rpx;">全部</navigator></view>
+                                </view>
+                                <view class="weui-cell" style="padding:0">
+                                        <view class="weui-cell__bd">
+                                                <navigator class="data-cell" url="orders_client?filt=20">
+                                                        <view class="data-icon"><image src="../../resource/images/ods_20.png" mode="widthFix"  /></view>
+                                                        <view class="data-txt">待服务</view>
+                                                        <text wx:if="{{statistic.todos>0}}" class="data-cell-hint data-cell-hint-red">{{statistic.todos}}</text>
+                                                </navigator>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                                <navigator class="data-cell"  url="orders_client?filt=30">
+                                                        <view class="data-icon"><image src="../../resource/images/ods_30.png" mode="widthFix"  /></view>
+                                                        <view class="data-txt">已完成</view>
+                                                </navigator>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                                <navigator class="data-cell"  url="orders_client?filt=40">
+                                                        <view class="data-icon"><image src="../../resource/images/ods_40.png" mode="widthFix"  /></view>
+                                                        <view class="data-txt">已取消</view>
+                                                </navigator>
+                                        </view>
+                                </view>
+                        </view>
+
+                        <!--
+                        <block wx:if="{{city.staff_team==2}}">
+                                <view class="weui-cells op-cells" style="margin-top:20rpx;">  
+                                        <navigator class="weui-cell weui-cell_access"  hover-class="weui-cell_active" url="team">
+
+                                                <view class="weui-cell__bd">我的团队</view>
+                                                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                                        </navigator>
+                                </view>
+                        </block>
+                        -->
+                        <!--如果是派单模式，且我没有派单权限-->
+                        <block wx:if="{{area.odmode==10 && staff.odmanar==0}}">
+                                <view style="text-align:center;padding:30rpx 0;" class="f5" >{{area.name}}当前为派单模式，请及时处理待服务的订单</view>
+                        </block>
+                        <block wx:else>
+                                <view class="vp-list-tt"><text>- 新的订单（{{area.name}}） -</text></view>
+                                <!--订单大厅-->
+                                <block wx:if="{{list!=null}}">
+                                        <view wx:if="{{list!=null && list.length==0}}"  style="padding:40rpx 40rpx 40rpx 40rpx;text-align:center;">
+                                                <image src="../../resource/images/empty.png" mode="widthFix" style="width:200rpx;"/>
+                                                <view class="f5" >暂时没有新的订单~</view>
+                                        </view>
+                                        <view wx:else  class="od-list">
+                                                <block wx:for="{{list}}">
+                                                        <view class="od-item"> <!-- 未接单时不可进入订单详情页 bindtap="toOrder" data-id="{{item.id}}"-->
+                                                                <view class="weui-cell od-bd" >
+                                                                        <view class="weui-cell__hd" >
+                                                                                <view>
+                                                                                        <image src="{{item.service_logo_image_url}}" mode="widthFix" class="od-logo" style="width:100rpx;height:100rpx;margin-right:20rpx;"/>
+                                                                                </view>
+                                                                        </view>
+                                                                        <view class="weui-cell__bd" >
+                                                                                <view>
+                                                                                        <view><text style="font-weight:bold">{{item.service_name}}</text></view>
+                                                                                        <view class="od-info">
+                                                                                                <block wx:if="{{item.service_stype < 200}}">
+                                                                                                        <block wx:if="{{item.service_stype <= 20}}">
+                                                                                                                <view><text>{{item.hospital_name}}（{{item.area_name}}）</text></view>
+                                                                                                                <view>预约时间：<formater  timestamp="{{item.starttime}}"  format="MM-dd hh:mm"></formater></view>
+                                                                                                                <view>就诊人员：<text style="margin-right:5rpx;">{{item.client_sex==1?'男':'女'}}</text><text style="margin-right:5rpx;">{{item.client_age}}周岁</text><text>{{item.client_name}}</text> </view>
+                                                                                                                <block wx:if="{{item.service_stype == 15}}">
+                                                                                                                        <view>接送地址：<text>{{item.address.address}}</text> </view>
+                                                                                                                </block>
+                                                                                                        </block>
+                                                                                                        <block wx:if="{{item.service_stype > 20 && item.service_stype < 100}}">
+                                                                                                                <view><text>{{item.hospital_name}}（{{item.area_name}}）</text></view>
+                                                                                                                <view>处理时间：<formater  timestamp="{{item.starttime}}"  format="MM-dd hh:mm"></formater></view>
+                                                                                                                <view>收件地址：<text>{{item.address.cityName}}{{item.address.countyName}}{{item.address.detailInfo}}</text> </view>
+                                                                                                        </block>
+                                                                                                        <block wx:if="{{item.service_stype > 100}}">
+                                                                                                                <view>服务时间：<formater  timestamp="{{item.starttime}}"  format="MM-dd hh:mm"></formater></view>
+                                                                                                                <view>服务对象：<text style="margin-right:5rpx;">{{item.client_sex==1?'男':'女'}}</text><text style="margin-right:5rpx;">{{item.client_age}}周岁</text><text>{{item.client_name}}</text> </view>
+                                                                                                                <view>服务地址：<text>{{item.address.address}}</text> </view>
+                                                                                                        </block>
+                                                                                                </block>
+                                                                                                <block else>
+                                                                                                        <view>支付费用：<text>{{item.price}}</text>元</view>
+                                                                                                </block>
+                                                                                                
+                                                                                                <view wx:if="{{item.demand}}"><text style="color:#ee5253">“{{item.demand}}”</text> </view>
+                                                                                        </view>
+                                                                                </view>
+                                                                        </view>
+                                                                        <view class="weui-cell__ft"></view>
+                                                                </view>
+                                                                <view class="weui-cell" >
+                                                                        <view class="weui-cell__bd" >
+                                                                                <view>本单收益：<text style="color:#bf7719;font-weight:bold">{{item.profit_fee}}元</text> </view>
+                                                                        </view>
+                                                                        <view class="weui-cell__ft">
+                                                                                <!--待付款-->
+                                                                                <block wx:if="{{item.status==10}}">
+                                                                                        <view style="color:#ffa200"><text>待支付</text></view>
+                                                                                        <view style="color:#ffa200"><text>00:39:33</text></view>
+                                                                                </block>
+                                                                                <!--进行中-->
+                                                                                <block wx:if="{{item.status==20}}">
+                                                                                        <block wx:if="{{area.odmode==0}}">
+                                                                                                <button class="btnam" bindtap="getOrder" data-id="{{item.id}}">接单</button>
+                                                                                        </block>
+                                                                                        <block wx:if="{{area.odmode==10}}">
+                                                                                                <button class="btnam" bindtap="giveOrder" data-index="{{index}}" data-id="{{item.id}}">派单</button>
+                                                                                        </block>
+                                                                                </block>
+                                                                        </view>
+                                                                        <!--接单时限
+                                                                        <view class="weui-cell__ft"  wx:if="{{item.status==20}}">
+                                                                                <clock  timestamp="{{item.refresh_time}}" nowtime="{{now}}"  format="MM月dd日 hh:mm"/>
+                                                                        </view>
+                                                                        -->
+                                                                </view>
+                                                        </view>
+                                                </block>
+                                                <view hidden="{{!is_loading_more}}" style="padding:40rpx;text-align:center;" >
+                                                        <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+                                                </view>
+                                                <view hidden="{{more==1}}" class="f5" style="padding:40rpx;text-align:center;">
+                                                        - 嗯，目前就这么多 -
+                                                </view>
+                                        </view>
+                                </block>
+                        </block>
+
+                </view>
+        </view>
+ </block>
+
+<block wx:else>
+        <view style="padding:200rpx 0 0 0;text-align:center;" >
+                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+        </view>
+</block>   
+
+
+<!-- 弹窗 - 派单 -->
+<view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{_odmanaModal}}"></view>
+<view class="modal-dialog" wx:if="{{_odmanaModal}}">
+        <view class="vp-flex"  style="height:100%;flex-direction:column;">
+                <view class="vp-flex_1" bindtap="hideOdmanaModal">
+                </view>
+                <view >
+                        <view class="modal-main" style="background:#F4F4F4;">
+                        <view  class="modal-hd">
+                                <text class="modal-hd-title">请选择要处理该订单的陪护员</text>
+                                <image class="modal-hd-closer" src="../../resource/images/modal_closer.png" mode="widthFix" bindtap="hideOdmanaModal"/>
+                        </view>
+                        <view  class="modal-bd" >
+                        
+                                <scroll-view scroll-y="true" style="max-height: 800rpx;">
+                                        <view class="weui-cells" style="margin:0">
+                                                <block wx:for="{{staffs}}">
+                                                        <view class="weui-cell">
+                                                                <view class="weui-cell__hd">
+                                                                        <image src="{{item.avatar_url}}" mode="aspectFill" style="display:block;width:80rpx;height:80rpx;border-radius:100rpx;margin-right:20rpx;"/>
+                                                                </view>
+                                                                <view class="weui-cell__bd">
+                                                                        <view style="font-weight:bold">{{item.nickname}}</view>
+                                                                        <view style="margin-top:5rpx;"><text class="color_click" style="font-size:26rpx;" bindtap="makePhoneCall" data-tel="{{item.mobile}}">{{item.mobile}}[拨打]</text></view>
+                                                                </view>
+                                                                <div class="weui-cell__ft">
+                                                                        <button class="btnam" bindtap="doGiveOrder" data-nickname="{{item.nickname}}" data-id="{{item.id}}">派单</button>
+                                                                </div>
+                                                        </view>
+                                                </block>
+                                        </view>
+                                </scroll-view>
+                        </view>
+
+                        </view>
+                </view>
+        </view>
+</view>
+<!-- 弹窗 - 派单-结束 -->
+
+<vpShare shareModal="{{_shareModal}}"></vpShare>

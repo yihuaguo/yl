@@ -1,0 +1,60 @@
+/* vp_timer/pages/index/user.wxss */
+page{background:#F4F4F4;}
+.weui-cell{padding:30rpx 40rpx}
+
+
+.st-banner{background:#2d7aff;padding-bottom:40rpx;}
+.st-banner view{color:#FFFFFF;}
+.st-banner text{color:#FFFFFF;}
+.st-banner .weui-cells{margin:0;background:none}
+.st-banner .weui-cells::before{display:none}
+.st-banner .weui-cells::after{display:none}
+.st-banner .weui-cell::before{left:30rpx;opacity: 0.3;}
+.st-avatar{width:130rpx;height:130rpx;border:2rpx solid #FFFFFF;border-radius:150rpx;overflow:hidden;margin-right:20rpx;}
+.st-avatar image{display:block;width:100%;height:100%;}
+.st-name{font-size:40rpx;font-weight:bold;}
+.st-banner .func .weui-cell__hd image{display:block;width:40rpx;height:40rpx;margin-right:15rpx;}
+
+
+.data-cells .weui-cell{padding:0 !important;}
+.data-cell{text-align:center;padding:30rpx 0;position:relative;}
+.data-val{font-size:36rpx;font-weight:bold;height:70rpx;line-height:70rpx;}
+.data-icon image{width:80rpx;height:80rpx;line-height:0;}
+.data-txt{font-size:26rpx;color:#999999;height:50rpx;line-height:50rpx;margin-top:10rpx;}
+.data-cell-hint{font-size:20rpx;color:#FFFFFF;background:#353535;height:30rpx;line-height:30rpx;padding:0 10rpx;border-radius:100rpx;overflow:hidden;position:absolute;right:30rpx;top:20rpx;}
+.data-cell-hint-red{background:#de4130;}
+
+.grid view{border:1rpx solid #cccccc;border-left:none;}
+
+
+.pannel-title{font-size:28rpx;font-weight:bold;}
+
+.orders-cells{border-bottom:1rpx solid #EEEEEE;}
+.orders-cells .weui-cell{padding:30rpx;}
+
+.orders-cell{padding:30rpx 0;text-align:center;position:relative;}
+.orders-cell-icon{width:70rpx;height:70rpx;}
+.orders-cell-text{font-size:26rpx;}
+.orders-cell-hint{font-size:20rpx;color:#FFFFFF;background:#353535;height:30rpx;line-height:30rpx;padding:0 10rpx;border-radius:100rpx;overflow:hidden;position:absolute;right:30rpx;top:20rpx;}
+.orders-cell-hint-red{background:#de4130;}
+
+.op-cells{margin:20rpx;border-radius:10rpx;overflow:hidden;}
+.op-cells::before{display:none;}
+.op-cells .weui-cell{padding:40rpx}
+.op-cells .weui-cell::before{left:40rpx;}
+.op-cells .weui-cell__bd{font-size:28rpx}
+
+
+
+.od-item{margin:20rpx;background:#FFFFFF;border:1rpx solid #EEEEEE;border-radius:10rpx;overflow:hidden;}
+.od-item .weui-cell{padding:30rpx;}
+.od-bd{-webkit-box-align:stretch;-webkit-align-items:stretch;align-items:stretch;}
+.od-logo{width:100rpx;height:100rpx;margin-right:20rpx;border-radius:10rpx;}
+.od-info view{font-size:24rpx;color:#999999;}
+.od-info text{font-size:24rpx;color:#999999;}
+.od-item .weui-cell__ft text{font-size:24rpx;}
+
+
+
+
+

@@ -1,0 +1,69 @@
+<!--vp_pz/pages/user/coupon.wxml-->
+<view class="couponContainer">
+  <view class="card cardNow" wx:for="{{list}}" wx:key="index">
+    <view class="header">
+      <view class="left">
+        <view class="title">
+          <view class="tag">￥</view>
+          <view class="price">{{item.price}}</view>
+        </view>
+        <view class="label">优惠券</view>
+      </view>
+      <view class="right">
+        <view class="title">{{item.name}}</view>
+        <view class="timeBox">
+          <view class="title">有效期至：</view>
+          <view class="time">2024/10/09</view>
+        </view>
+      </view>
+    </view>
+    <view class="footer">
+      <view class="title">* {{item.content}}</view>
+      <view class="bt now" data-id="{{item.id}}" bindtap="handleGetCoupon">立即领取</view>
+    </view>
+  </view>
+  <view class="card cardNow">
+    <view class="header">
+      <view class="left">
+        <view class="title">
+          <view class="tag">￥</view>
+          <view class="price">50</view>
+        </view>
+        <view class="label">优惠券</view>
+      </view>
+      <view class="right">
+        <view class="title">就诊优惠券</view>
+        <view class="timeBox">
+          <view class="title">有效期至：</view>
+          <view class="time">2024/10/09</view>
+        </view>
+      </view>
+    </view>
+    <view class="footer">
+      <view class="title">* 就诊优惠卡仅在指定服务结算时有效</view>
+      <view class="bt received">已领取</view>
+    </view>
+  </view>
+  <view class="card cardExpired">
+    <view class="header">
+      <view class="left">
+        <view class="title">
+          <view class="tag">￥</view>
+          <view class="price">50</view>
+        </view>
+        <view class="label">优惠券</view>
+      </view>
+      <view class="right">
+        <view class="title">就诊优惠券</view>
+        <view class="timeBox">
+          <view class="title">有效期至：</view>
+          <view class="time">2024/10/09</view>
+        </view>
+      </view>
+    </view>
+    <view class="footer">
+      <view class="title">* 就诊优惠卡仅在指定服务结算时有效</view>
+      <view class="bt expired">立即领取</view>
+    </view>
+  </view>
+</view>

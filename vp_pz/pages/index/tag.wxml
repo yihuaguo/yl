@@ -1,0 +1,39 @@
+<!--vp_cai/pages/index/citys.wxml-->
+<!--vp_timer/pages/index/user.wxml-->
+<block wx:if="{{main_loaded}}">
+        
+        <view class="weui-cells serv-list">
+                <view class="weui-cell serv-tt" >
+                        <view class="weui-cell__bd">
+                                <view><text class="tag-name">{{tag}}</text></view>
+                                <view style="padding-top:10rpx;"><text class="tag-intro">请选择您需要的服务（不同医院最终价格可能略有变化）</text></view>
+                        </view>
+                        <view class="weui-cell__ft ">
+                                
+                        </view>
+                </view>
+                <view wx:for="{{services}}" class="weui-cell serv-item" bindtap="toService" data-svid="{{item.id}}" >
+                        <view class="weui-cell__hd">
+                                <image class="serv-logo" src="{{item.logo_image?item.logo_image_url:'../../resource/images/avatar.jpg'}}" mode="aspectFill"  />
+                        </view>
+                        <view class="weui-cell__bd">
+                                <view><text class="serv-name">{{item.name}}</text></view>
+                                <view class="serv-line serv-intro">{{item.intro}}</view>
+                                <view class="serv-line"><text class="serv-price">{{item.price}}</text> <text class="serv-unit">元/次</text></view>
+                        </view>
+                        <view class="weui-cell__ft ">
+                                <button class="btn1m">预约</button>
+                        </view>
+                </view>
+        </view>
+
+ </block>
+
+<block wx:else>
+        <view style="padding:200rpx 0 0 0;text-align:center;" >
+                <image src="../../resource/images/loading.gif" mode="widthFix" style="width:100rpx;height:100rpx;"/>
+        </view>
+</block>   
+
+
+

@@ -1,0 +1,36 @@
+<!--vp_pz/pages/physician/index.wxml-->
+<view class="physicianContainer">
+  <view class='inputHeader'>
+    <view class="inputBox">
+      <image src='../../resource/images/ic_search.png' class="searchImg" />
+      <input value="{{search}}" class="input" class="input" bindinput="onNicknameChange" />
+    </view>
+  </view>
+  <view class="tabContainer">
+    <text class="{{currentTab === 1 ? 'currentTab' : 'defaultTab'}}" data-id="1" bindtap="handleChangeTab">推荐陪诊</text>
+    <text class="{{currentTab === 2 ? 'currentTab' : 'defaultTab'}}" data-id="2" bindtap="handleChangeTab">综合排序</text>
+    <text class="{{currentTab === 3 ? 'currentTab' : 'defaultTab'}}" data-id="3" bindtap="handleChangeTab">同城陪诊</text>
+    <text bindtap="toPzRequestPage" class="request" style="background-color: #F25A65;">入驻申请</text>
+  </view>
+  <view class="physicianListContainer">
+    <view class="card" wx:for="{{list}}" wx:key="index">
+      <image class="avatar" src='{{item.avatar_url}}' />
+      <view class="info">
+        <view class="header">
+          <view class="usernameBox">
+            <text class="name">{{item.nickname}}</text>
+            <view class="approve">实名认证</view>
+          </view>
+          <view class='addressBox'>
+            <image class="addressTag" src='../../resource/images/avatarAddress.png' />
+            <text class="addressText">{{calculateDistance(meAddressData.latitude, meAddressData.longitude, item.latitude, item.longitude)}}</text>
+          </view>
+          <image class="reserve" src='../../resource/images/zxShare.png' bindtap="toDetail" data-id="{{item.id}}" />
+        </view>
+        <view class="description">
+          {{item.desc}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

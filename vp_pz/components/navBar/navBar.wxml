@@ -1,0 +1,54 @@
+<block wx:if="{{isCover}}">
+    <cover-view class='nav' style='height: {{status + navHeight}}px'>
+        <cover-view class='status' style='height: {{status}}px;{{containerStyle}}'></cover-view>
+        <cover-view class='navbar' style='height:{{navHeight}}px;{{containerStyle}}'>
+            <cover-view class='back-icon' wx:if="{{isNav}}" bindtap='backOrHome'>
+                <block wx:if="{{pages>1}}">
+                        <cover-image src='resource/ic_back{{isWhite?"_white":""}}.png'></cover-image>
+                </block>
+                <block wx:else>
+                        <cover-image src='resource/ic_home{{isWhite?"_white":""}}.png'></cover-image>
+                </block>
+            </cover-view>
+            <!--
+            <cover-view class='home-icon' wx:if="{{homeIcon}}" bindtap='home'>
+                <cover-image src='{{homeIcon}}'></cover-image>
+            </cover-view>
+            -->
+            <cover-view class='nav-icon' wx:if="{{titleImg}}">
+                <cover-image src='{{titleImg}}' mode="widthFix" style='{{iconStyle}}'></cover-image>
+            </cover-view>
+            <cover-view class='nav-title' wx:if="{{titleText && !titleImg}}" >
+                <cover-view  style=' height:{{navHeight}}px;line-height:{{navHeight}}px;{{textStyle}}'>{{titleText}}</cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+    <cover-view wx:if="{{isHeight}}" style='height: {{status + navHeight}}px'><!--占位，由外部页面控制，也可此处不占，由外部页面通过监听navBarAttached获得高度后占--></cover-view>
+</block>
+<block wx:else>
+        <view class='nav' style='height: {{status + navHeight}}px'>
+        <view class='status' style='height: {{status}}px;{{containerStyle}}'></view>
+        <view class='navbar' style='height:{{navHeight}}px;{{containerStyle}}'>
+            <view class='back-icon' wx:if="{{isNav}}" bindtap='backOrHome'>
+                <block wx:if="{{pages>1}}">
+                        <image src='resource/ic_back{{isWhite?"_white":""}}.png'></image>
+                </block>
+                <block wx:else>
+                        <image src='resource/ic_home{{isWhite?"_white":""}}.png'></image>
+                </block>
+            </view>
+            <!--
+            <view class='home-icon' wx:if="{{homeIcon}}" bindtap='home'>
+                <image src='{{homeIcon}}'></image>
+            </view>
+            -->
+            <view class='nav-icon' wx:if="{{titleImg}}">
+                <image src='{{titleImg}}' mode="widthFix" style='{{iconStyle}}'></image>
+            </view>
+            <view class='nav-title' wx:if="{{titleText && !titleImg}}" >
+                <view  style=' height:{{navHeight}}px;line-height:{{navHeight}}px;{{textStyle}}'>{{titleText}}</view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{isHeight}}" style='height: {{status + navHeight}}px'><!--占位，由外部页面控制，也可此处不占，由外部页面通过监听navBarAttached获得高度后占--></view>
+</block>
