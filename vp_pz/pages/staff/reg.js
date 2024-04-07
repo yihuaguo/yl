@@ -252,10 +252,11 @@ Page({
 
   staffSave: function (e) {
     var self = this;
+    // console.log('addressData',self.addressData);
 
-    if (!self.addressData.address) {
-      return
-    }
+    // if (!self.addressData.address) {
+    //   return
+    // }
 
     if (self.data._is_saving) {
       return;
@@ -455,7 +456,7 @@ Page({
     var self = this;
     wx.chooseLocation({
       success: function (res) {
-        console.log(res.latitude, res.longitude);
+        console.log(res.latitude, res.longitude, res.address);
         self.setData({
           addressData: {
             address: res.address,

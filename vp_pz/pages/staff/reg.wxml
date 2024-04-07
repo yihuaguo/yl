@@ -72,7 +72,7 @@
               位置
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" name="nickname" style="text-align:right" placeholder-class="vp-placeholder" placeholder="设置您的位置" value="{{addressData.address}}" />
+              <input class="weui-input" name="address" style="text-align:right" placeholder-class="vp-placeholder" placeholder="设置您的位置" value="{{addressData.address}}" />
             </view>
           </view>
 
@@ -100,6 +100,13 @@
             </view>
             <view class="weui-cell__bd">
               <input class="weui-input" type="number" name="mobile" style="text-align:right" placeholder-class="vp-placeholder" placeholder="请填写您的手机号" value="{{staff.mobile}}" />
+            </view>
+          </view><view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              个人介绍
+            </view>
+            <view class="weui-cell__bd">
+              <textarea value="{{staff.desc}}" style="text-align:right" placeholder-class="vp-placeholder" placeholder="请填写个人介绍" />
             </view>
           </view>
 

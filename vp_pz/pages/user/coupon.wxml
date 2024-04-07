@@ -13,16 +13,27 @@
         <view class="title">{{item.name}}</view>
         <view class="timeBox">
           <view class="title">有效期至：</view>
-          <view class="time">2024/10/09</view>
+          <view class="time">{{item.expire_date}}</view>
         </view>
       </view>
     </view>
     <view class="footer">
       <view class="title">* {{item.content}}</view>
-      <view class="bt now" data-id="{{item.id}}" bindtap="handleGetCoupon">立即领取</view>
+      <view wx:if="{{item.use_status == -1}}">
+        <view class="bt now" data-id="{{item.id}}" bindtap="handleGetCoupon">立即领取</view>
+      </view>
+      <view wx:if="{{item.use_status == 0}}">
+        <view class="bt received">已领取</view>
+      </view>
+      <view wx:if="{{item.use_status == 1}}">
+        <view class="bt received">已使用</view>
+      </view>
+      <view wx:if="{{item.use_status == 2}}">
+        <view class="bt expired">立即领取</view>
+      </view>
     </view>
   </view>
-  <view class="card cardNow">
+  <!-- <view class="card cardNow">
     <view class="header">
       <view class="left">
         <view class="title">
@@ -65,5 +76,5 @@
       <view class="title">* 就诊优惠卡仅在指定服务结算时有效</view>
       <view class="bt expired">立即领取</view>
     </view>
-  </view>
+  </view> -->
 </view>

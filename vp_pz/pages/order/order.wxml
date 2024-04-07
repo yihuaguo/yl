@@ -66,7 +66,7 @@
                 </view>
                 -->
 
-                <block wx:if="{{order.staff_status==10}}">
+                <block wx:if="{{order.staff_toid}}">
                         <view class="od-box" >
                                 <view class="weui-cells">
                                         <view class="weui-cell">
@@ -85,12 +85,27 @@
                                                 <view class="weui-cell__bd">
                                                         <view>{{order._staff.nickname}}</view>
                                                 </view>
-                                                <view class="weui-cell__ft">
+                                                <view class="weui-cell__ft" wx:if="{{order._staff.staff_status == 10}}">
                                                         <view>
                                                                 <button class="btn1m" bindtap="makePhoneCall" data-tel="{{order._staff.mobile}}">电话联系</button>
                                                         </view>
                                                 </view>
                                         </view>
+                                        <view class="weui-cell od-staff">
+                                        个人介绍：{{order._staff.desc}}
+                                        </view>
+                                        <view class="weui-cell">
+                                        <view class="weui-cell__hd">
+                                                <view class="weui-label">接单状态</view>
+                                        </view>
+                                        <view class="weui-cell__bd">
+                                        </view>
+                                        <view class="weui-cell__ft">
+                                                <view>
+                                                  {{order._staff.staff_status == 10 ? '已接单':'尚未接单'}}
+                                                </view>
+                                        </view>
+                    </view>
                                 </view>
                         </view>
                 </block>

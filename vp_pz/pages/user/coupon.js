@@ -71,7 +71,7 @@ Page({
     var self = this;
     app.util.request({
       url: 'coupon/list',
-      data: {},
+      data: {"from":"my"},
       success(res) {
         console.log('res', res)
         const list = res.data?.data?.list || [];
