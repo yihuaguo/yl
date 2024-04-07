@@ -23,13 +23,13 @@
         <view class="bt now" data-id="{{item.id}}" bindtap="handleGetCoupon">立即领取</view>
       </view>
       <view wx:if="{{item.use_status == 0}}">
-        <view class="bt received">已领取</view>
+        <view class="bt expired">未使用</view>
       </view>
       <view wx:if="{{item.use_status == 1}}">
-        <view class="bt received">已使用</view>
+        <view class="bt expired">已使用</ view>
       </view>
       <view wx:if="{{item.use_status == 2}}">
-        <view class="bt expired">立即领取</view>
+        <view class="bt expired">已过期</view>
       </view>
     </view>
   </view>

@@ -252,11 +252,10 @@ Page({
 
   staffSave: function (e) {
     var self = this;
-    // console.log('addressData',self.addressData);
 
-    // if (!self.addressData.address) {
-    //   return
-    // }
+    if (!self.addressData?.address) {
+      return
+    }
 
     if (self.data._is_saving) {
       return;

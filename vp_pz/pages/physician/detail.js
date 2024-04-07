@@ -9,6 +9,7 @@ Page({
   data: {
     userData: {},
     service: [],
+    pzId: undefined,
     meAddressData: {},
     _shareModal: false,
     backgroundImageUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAAA8CAYAAADSfGxZAAAAAXNSR0IArs4c6QAAAfBJREFUaEPtm01OwlAUhe8pM1iCiatwF0JMXIGOjEYXYPAnBlyBDpypC3BgBDdg4sjEoYkzjZo4IXEAcWDfJa9/FpC2GAaUHkZAH4++j3PPfS33QsY8Ku3jNVVTA2RJBAsiUho3dkbed0X0XVUeAOemu1y/mOS8MDzYAhAxRyJYnGSi2RurryLOYVYgAyDKreYJINuzt6j/n5GqnPaqeztpM0Qg5hFCuPgsMDwQfjjoeRq1fB/HelKYBCAaL/n3hLSfSTvGYEthPkpu6bm7Uv+MfwLFUIO/ZFW5FMG9fW7EffquHtyFMFBuNa4ArKbxnIfjavRR4JxFa1Hz1qvt39rXqLSLEBaRbXZUnd34jxoqA5V28ycHm6VpCdKoYnN4MrhybUHotL4lD/OoYmP4PK0qCMIzUf0iCM8pxRBEECcEQRCDlklFUBFUxMg+Ithic0NFELHooFnSLGmWNEv/LtXo1SfNkmY5eueEWYNZg1mDWYNZIxYFTJ8BDIIgiMHsQEVQEVTEn/9AMjQYGgwNhkZSeQI9gh5Bj6BH0COSCNAjMngES4d8SCwmC8QSlhey4NQvOGUJsi1OZ1H6b1F6EZpWQlNMaFOwQ4oRHimNKz6IIqgiQyuThcHmttjGax5hZOnwswjYABuWBYy7TilaS3QfZ1iQ4itneEUAAAAASUVORK5CYII='
@@ -31,6 +32,7 @@ Page({
         const service = res.data?.data?.service || []
 
         self.setData({
+          pzId: self.options?.id,
           userData: data,
           service,
           backgroundImageUrl: data.avatar_url
@@ -128,7 +130,8 @@ Page({
 
   toService: function (e) {
     wx.navigateTo({
-      url: '../index/service?svid=' + e.currentTarget.dataset.svid + '&hid=' + this.data.userData.id
+      url: '../index/service?svid=' + e.currentTarget.dataset.svid + '&hid=' + this.data.userData.id +
+        '&dId=' + this.data?.pzId
     })
   },
 })
