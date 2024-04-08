@@ -252,8 +252,8 @@ Page({
 
   staffSave: function (e) {
     var self = this;
-
-    if (!self.addressData?.address) {
+console.log(self.data.addressData);
+    if (!self.data.addressData?.address) {
       return
     }
 
@@ -361,6 +361,8 @@ Page({
       });
     }
     staff.idcardnum = e.detail.value.idcardnum;
+    staff.desc = e.detail.value.desc;
+    staff.language = e.detail.value.language;
 
     // 身份证上传
     if (!staff.idcard1) {
@@ -402,7 +404,7 @@ Page({
       address,
       latitude,
       longitude
-    } = self.addressData
+    } = self.data.addressData
 
     staff.address = address
     staff.latitude = latitude
@@ -463,6 +465,7 @@ Page({
             longitude: res.longitude
           }
         })
+        console.log('------',self.addressData);
       }
     })
   },

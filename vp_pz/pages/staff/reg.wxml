@@ -101,12 +101,21 @@
             <view class="weui-cell__bd">
               <input class="weui-input" type="number" name="mobile" style="text-align:right" placeholder-class="vp-placeholder" placeholder="请填写您的手机号" value="{{staff.mobile}}" />
             </view>
-          </view><view class="weui-cell weui-cell_input">
+          </view>
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              擅长语言
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" name="language" style="text-align:right" placeholder-class="vp-placeholder" placeholder="请填写您的擅长语言" value="{{staff.language}}" />
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
               个人介绍
             </view>
             <view class="weui-cell__bd">
-              <textarea value="{{staff.desc}}" style="text-align:right" placeholder-class="vp-placeholder" placeholder="请填写个人介绍" />
+              <textarea style="text-align:right" placeholder-class="vp-placeholder" placeholder="请填写个人介绍" name="desc">{{staff.desc}}</textarea>
             </view>
           </view>
 
