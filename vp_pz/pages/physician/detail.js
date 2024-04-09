@@ -10,7 +10,7 @@ Page({
     userData: {},
     service: [],
     pzId: undefined,
-    meAddressData: {},
+    jl: '-',
     _shareModal: false,
     backgroundImageUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAAA8CAYAAADSfGxZAAAAAXNSR0IArs4c6QAAAfBJREFUaEPtm01OwlAUhe8pM1iCiatwF0JMXIGOjEYXYPAnBlyBDpypC3BgBDdg4sjEoYkzjZo4IXEAcWDfJa9/FpC2GAaUHkZAH4++j3PPfS33QsY8Ku3jNVVTA2RJBAsiUho3dkbed0X0XVUeAOemu1y/mOS8MDzYAhAxRyJYnGSi2RurryLOYVYgAyDKreYJINuzt6j/n5GqnPaqeztpM0Qg5hFCuPgsMDwQfjjoeRq1fB/HelKYBCAaL/n3hLSfSTvGYEthPkpu6bm7Uv+MfwLFUIO/ZFW5FMG9fW7EffquHtyFMFBuNa4ArKbxnIfjavRR4JxFa1Hz1qvt39rXqLSLEBaRbXZUnd34jxoqA5V28ycHm6VpCdKoYnN4MrhybUHotL4lD/OoYmP4PK0qCMIzUf0iCM8pxRBEECcEQRCDlklFUBFUxMg+Ithic0NFELHooFnSLGmWNEv/LtXo1SfNkmY5eueEWYNZg1mDWYNZIxYFTJ8BDIIgiMHsQEVQEVTEn/9AMjQYGgwNhkZSeQI9gh5Bj6BH0COSCNAjMngES4d8SCwmC8QSlhey4NQvOGUJsi1OZ1H6b1F6EZpWQlNMaFOwQ4oRHimNKz6IIqgiQyuThcHmttjGax5hZOnwswjYABuWBYy7TilaS3QfZ1iQ4itneEUAAAAASUVORK5CYII='
   },
@@ -20,7 +20,9 @@ Page({
    */
   onLoad(options) {
     var self = this;
+    console.log('self', self.options)
     const id = self.options?.id
+    const jl = self.options?.jl
     if (!id) return
     app.util.request({
       url: 'peihu/detail',
@@ -35,24 +37,11 @@ Page({
           pzId: self.options?.id,
           userData: data,
           service,
+          jl,
           backgroundImageUrl: data.avatar_url
         })
       }
     })
-    wx.getLocation({
-      type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，可以指定返回的坐标类型
-      success: function (res) {
-        var latitude = res.latitude; // 纬度，浮点数，范围为 -90~90，负数表示南纬
-        var longitude = res.longitude; // 经度，浮点数，范围为 -180~180，负数表示西经
-        self.setData({
-          meAddressData: {
-            latitude,
-            longitude
-          }
-        })
-      },
-      fail: function () {}
-    });
   },
 
   /**

@@ -16,7 +16,7 @@
           </view>
           <image class="tag" src='../../resource/images/avatarAddress.png' />
           <text class="address" style="margin-right: 30rpx">{{userData.city}}</text>
-          <text class="address">{{calculateDistance(meAddressData.latitude, meAddressData.longitude, userData.latitude, userData.longitude)}}</text>
+          <text class="address">{{jl}}</text>
         </view>
       </view>
       <view class="description">

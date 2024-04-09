@@ -23,9 +23,9 @@
           </view>
           <view class='addressBox'>
             <image class="addressTag" src='../../resource/images/avatarAddress.png' />
-            <text class="addressText">{{calculateDistance(meAddressData.latitude, meAddressData.longitude, item.latitude, item.longitude)}}</text>
+            <text class="addressText">{{item.jl}}</text>
           </view>
-          <image class="reserve" src='../../resource/images/zxShare.png' bindtap="toDetail" data-id="{{item.id}}" />
+          <image class="reserve" src='../../resource/images/zxShare.png' bindtap="toDetail" data-id="{{item.id}}" data-jl="{{item.jl}}" />
         </view>
         <view class="description">
           {{item.desc}}
