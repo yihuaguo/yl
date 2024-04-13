@@ -30,7 +30,8 @@
     "vp_pz/pages/staff/bindacced",
     "vp_pz/pages/physician/index",
     "vp_pz/pages/physician/detail",
-    "vp_pz/pages/user/coupon"
+    "vp_pz/pages/user/coupon",
+    "vp_pz/pages/user/coupon2"
   ],
   "permission": {
     "scope.userLocation": {

@@ -1,0 +1,27 @@
+<!--vp_pz/pages/user/coupon.wxml-->
+<view class="couponContainer">
+  <view class="card cardNow" wx:for="{{list}}" wx:key="index">
+    <view class="header">
+      <view class="left">
+        <view class="title">
+          <view class="tag">￥</view>
+          <view class="price">{{item.coupon.price}}</view>
+        </view>
+        <view class="label">优惠券</view>
+      </view>
+      <view class="right">
+        <view class="title">{{item.coupon.name}}</view>
+        <view class="timeBox">
+          <view class="title">有效期至：</view>
+          <view class="time">{{item.expire_date}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="footer">
+      <view class="title">* {{item.content}}</view>
+      <view>
+        <view class="bt now" data-id="{{item.id}}" bindtap="handleSelect">选择</view>
+      </view>
+    </view>
+  </view>
+</view>

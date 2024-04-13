@@ -12,6 +12,7 @@ Page({
     hospital_index: 0,
     pzId: undefined,
     client: {},
+    coupon_id: 0,
 
     order: {},
 
@@ -25,12 +26,15 @@ Page({
    */
   onLoad: function (options) {
     console.log(this);
+    console.log('options:',options);
+    console.log('coupon_id:',options.coupon_id);
     var self = this;
 
     self.setData({
       pzId: options.dId,
       svid: options.svid,
-      hid: options.hid ? options.hid : ''
+      hid: options.hid ? options.hid : '',
+      nickname: options.nickname ? options.nickname : ''
     });
 
     app.util.getUserInfo(function (response) {
@@ -82,7 +86,7 @@ Page({
         });
         self.setData({
           main_loaded: true,
-          _serviceModal: true,
+          _serviceModal: false,
           now: data.now,
           service: data.service,
           hospitals: hospitals,
@@ -143,6 +147,12 @@ Page({
   onClientChange: function (e) {
     wx.navigateTo({
       url: '../index/clients?act=select',
+    })
+  },
+
+  onCouponChange: function (e) {
+    wx.navigateTo({
+      url: '../user/coupon2?act=select',
     })
   },
 
@@ -231,13 +241,13 @@ Page({
 
     if (this.data.service.stype == 10 || this.data.service.stype == 15 || this.data.service.stype == 20) {
       // 就诊人验证
-      if (!this.data.client || !this.data.client.id) {
-        return wx.showToast({
-          title: '请选择就诊人',
-          icon: 'none',
-          duration: 2000
-        });
-      }
+      // if (!this.data.client || !this.data.client.id) {
+      //   return wx.showToast({
+      //     title: '请选择就诊人',
+      //     icon: 'none',
+      //     duration: 2000
+      //   });
+      // }
       order.client_id = this.data.client.id;
       order.client_name = this.data.client.name;
       order.client_sex = this.data.client.sex;
@@ -334,7 +344,10 @@ Page({
     // }
 
     order.staff_toid = self.data?.pzId
-
+console.log(order);
+console.log(coupon_id);
+console.log(this.data);
+return;
     // 序列化提交数据对象
     var form = encodeURI(JSON.stringify(order));
 
