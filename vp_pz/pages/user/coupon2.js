@@ -80,14 +80,17 @@ Page({
 
   handleSelect: function (event) {
     let that = this;
-    var itemId = event.currentTarget.dataset.id;
+    var itemId = event.currentTarget.dataset.id.id;
+    var name = event.currentTarget.dataset.id.coupon.name;
+    console.log(itemId,name,'cs');
     if (!itemId) return
     let pages = getCurrentPages();
     if (pages.length >= 2) {
       var prevPage = pages[pages.length - 2]; //上一个页面
       //给pageA页面赋值
       prevPage.setData({
-        coupon_id:itemId
+        coupon_id:itemId,
+        coupon_name:name,
       });
 
       wx.navigateBack();

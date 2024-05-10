@@ -1,0 +1,95 @@
+/* vp_pz/pages/newDetail/newDetail.wxss */
+.button {
+    width: unset;
+    height: unset;
+    background: unset;
+    border: unset !important;
+    border: none !important;
+    border-color: transparent;
+}
+.topImgWrap {
+    font-size: 0;
+}
+.topImg {
+    width: 750rpx;
+    height: 460rpx;
+}
+.whiteWrap {
+    margin: 20rpx;
+    padding: 30rpx;
+    border-radius: 20rpx;
+    background: #fff;
+}
+.whiteWrap .name {
+    font-size: 36rpx;
+    color: #333333;
+}
+.whiteWrap .desc {
+    font-size: 28rpx;
+    color: #999999;
+    margin-top: 8rpx;
+    margin-bottom: 12rpx;
+}
+.whiteWrap .price {
+    font-size: 40rpx;
+    color: #0BB584;
+}
+.whiteWrap .price .unit {
+    font-size: 24rpx;
+    color: #0BB584;
+}
+.bottomWrapss {
+    height: 196rpx;
+}
+.bottomWrap {
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    width: 750rpx;
+    height: 196rpx;
+    overflow: hidden;
+}
+.bottomWrap .shareWrap {
+    font-size: 0;
+}
+.bottomWrap .shareWrap .shareIcon {
+    width: 48rpx;
+    height: 48rpx;
+}
+.bottomWrap .shareWrap .shareText {
+    font-size: 24rpx;
+    color: #333333;
+}
+.bottomWrap .desc {
+    font-size: 30rpx;
+    color: #666666;
+}
+.bottomWrap .price {
+    font-size: 36rpx;
+    color: #0BB584;
+}
+.bottomWrap .btn {
+    width: 200rpx;
+    height: 88rpx;
+    background: #0BB584;
+    border-radius: 20rpx;
+    margin-right: 30rpx;
+    margin-left: 24rpx;
+    text-align: center;
+    line-height: 88rpx;
+    font-size: 30rpx;
+    color: #FFFFFF;
+}
+.flex {
+    display: flex;
+    align-items: center;
+}
+.flex-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 40rpx;
+}
+.mt-24 {
+    margin-top: 24rpx;
+}

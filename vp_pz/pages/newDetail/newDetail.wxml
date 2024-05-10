@@ -1,0 +1,50 @@
+<!--vp_pz/pages/newDetail/newDetail.wxml-->
+<!-- <text>vp_pz/pages/newDetail/newDetail.wxml</text> -->
+<view>
+    <view class="topImgWrap">
+        <image class="topImg" src="{{detail.main_image}}" mode="" />
+    </view>
+    <view class="whiteWrap">
+        <view class="name">
+            {{detail.name}}
+        </view>
+        <view class="desc">
+            {{detail.intro}}
+        </view>
+        <view class="price">
+            {{detail.priceo}}<text class="unit">元/次</text>
+        </view>
+    </view>
+    <view class="whiteWrap">
+        <rich-text nodes="{{detail.content}}" />
+    </view>
+    <view class="bottomWrapss">
+    </view>
+    <view class="bottomWrap">
+        <view class="flex mt-24">
+            <button open-type="share" plain="{{true}}" class="button">
+                <view class="flex-c">
+                    <view class="shareWrap">
+                        <image class="shareIcon" src="https://ppzz.m666m.cc/assets/img/share.png" mode="" />
+                    </view>
+                    <view class="shareText">
+                        分享
+                    </view>
+                </view>
+            </button>
+            <view style="flex: 1;">
+            </view>
+            <view class="flex">
+                <view class="desc">
+                    需要付：
+                </view>
+                <view class="price">
+                    {{detail.priceo}}元
+                </view>
+                <view bind:tap="goPay" class="btn">
+                    立即下单
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

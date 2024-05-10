@@ -31,7 +31,9 @@
     "vp_pz/pages/physician/index",
     "vp_pz/pages/physician/detail",
     "vp_pz/pages/user/coupon",
-    "vp_pz/pages/user/coupon2"
+    "vp_pz/pages/user/coupon2",
+    "vp_pz/pages/newDetail/newDetail",
+    "vp_pz/pages/index/hospDetail"
   ],
   "permission": {
     "scope.userLocation": {
@@ -40,7 +42,7 @@
   },
   "requiredPrivateInfos": [
     "getLocation",
-    "chooseAddress"
+    "chooseLocation"
   ],
   "window": {
     "navigationBarTextStyle": "white",

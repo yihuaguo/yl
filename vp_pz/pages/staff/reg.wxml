@@ -49,7 +49,7 @@
 
           <view class="weui-cell">
             <view class="weui-cell__hd">
-              形象照片
+              头像
             </view>
             <view class="weui-cell__bd"></view>
             <view class="weui-cell__ft">
@@ -72,7 +72,7 @@
               位置
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" name="address" style="text-align:right" placeholder-class="vp-placeholder" placeholder="设置您的位置" value="{{addressData.address}}" />
+              <input disabled="{{true}}" class="weui-input" name="address" style="text-align:right" placeholder-class="vp-placeholder" placeholder="设置您的位置" value="{{addressData.address?addressData.address:staff.address}}" />
             </view>
           </view>
 
@@ -115,7 +115,7 @@
               个人介绍
             </view>
             <view class="weui-cell__bd">
-              <textarea style="text-align:right" placeholder-class="vp-placeholder" placeholder="请填写个人介绍" name="desc">{{staff.desc}}</textarea>
+              <textarea style="text-align:right" placeholder-class="vp-placeholder" name="desc">{{staff.desc}}</textarea>
             </view>
           </view>
 
@@ -156,6 +156,52 @@
             <view class="weui-cell__ft">
               <view class="logo-box" bindtap="onIdcard2Change">
                 <image src="{{staff.idcard2_file?staff.idcard2_file:(staff.idcard2?staff._idcard2:'../../resource/images/pic_add.png')}}" mode="aspectFit" />
+              </view>
+            </view>
+          </view>
+          
+
+          <view class="weui-cell">
+            <view class="weui-cell__hd">
+              医护证(职业证)
+            </view>
+            <view class="weui-cell__bd"></view>
+            <view class="weui-cell__ft">
+              <view class="logo-box" bindtap="onYihuImageChange">
+                <image src="{{staff.yihu_image_file?staff.yihu_image_file:(staff.yihu_image?staff.yihu_image:'../../resource/images/pic_add.png')}}" mode="aspectFit" />
+              </view>
+            </view>
+          </view>
+          <view class="weui-cell">
+            <view class="weui-cell__hd">
+              健康师证
+            </view>
+            <view class="weui-cell__bd"></view>
+            <view class="weui-cell__ft">
+              <view class="logo-box" bindtap="onHealthImageChange">
+                <image src="{{staff.health_image_file?staff.health_image_file:(staff.health_image?staff.health_image:'../../resource/images/pic_add.png')}}" mode="aspectFit" />
+              </view>
+            </view>
+          </view>
+          <view class="weui-cell">
+            <view class="weui-cell__hd">
+              营养师证
+            </view>
+            <view class="weui-cell__bd"></view>
+            <view class="weui-cell__ft">
+              <view class="logo-box" bindtap="onNourImageChange">
+                <image src="{{staff.nourishment_image_file?staff.nourishment_image_file:(staff.nourishment_image?staff.nourishment_image:'../../resource/images/pic_add.png')}}" mode="aspectFit" />
+              </view>
+            </view>
+          </view>
+          <view class="weui-cell">
+            <view class="weui-cell__hd">
+              其他证件
+            </view>
+            <view class="weui-cell__bd"></view>
+            <view class="weui-cell__ft">
+              <view class="logo-box" bindtap="onOtherImageChange">
+                <image src="{{staff.other_image_file?staff.other_image_file:(staff.other_image?staff.other_image:'../../resource/images/pic_add.png')}}" mode="aspectFit" />
               </view>
             </view>
           </view>

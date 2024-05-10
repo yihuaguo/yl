@@ -13,7 +13,7 @@
     <text bindtap="toPzRequestPage" class="request" style="background-color: #F25A65;">入驻申请</text>
   </view>
   <view class="physicianListContainer">
-    <view class="card" wx:for="{{list}}" wx:key="index">
+    <view class="card" bindtap="toDetail" data-id="{{item.id}}" data-jl="{{item.jl}}" wx:for="{{list}}" wx:key="index">
       <image class="avatar" src='{{item.avatar_url}}' />
       <view class="info">
         <view class="header">
@@ -25,7 +25,7 @@
             <image class="addressTag" src='../../resource/images/avatarAddress.png' />
             <text class="addressText">{{item.jl}}</text>
           </view>
-          <image class="reserve" src='../../resource/images/zxShare.png' bindtap="toDetail" data-id="{{item.id}}" data-jl="{{item.jl}}" />
+          <image class="reserve" src='../../resource/images/zxShare.png' />
         </view>
         <view class="description">
           {{item.desc}}

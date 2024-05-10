@@ -153,3 +153,10 @@ page{background:#FFFFFF;}
 .link-intro{margin-top:5rpx;font-size:24rpx;color:#BBBBBB;}
 
 **/
+.hosp-intro {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

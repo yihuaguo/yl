@@ -20,7 +20,7 @@
     <view class="footer">
       <view class="title">* {{item.content}}</view>
       <view>
-        <view class="bt now" data-id="{{item.id}}" bindtap="handleSelect">选择</view>
+        <view class="bt now" data-id="{{item}}" bindtap="handleSelect">选择</view>
       </view>
     </view>
   </view>

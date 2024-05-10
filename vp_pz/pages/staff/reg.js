@@ -243,7 +243,195 @@ Page({
       }
     });
   },
+//=======
+  // 医护证(职业证)
+  onYihuImageChange: function () {
+    var self = this;
+    var url = app.util.url('Common/upload');
+    wx.chooseImage({
+      count: 1,
+      success: function (res) {
+        res.tempFilePaths[0],
+          self.setData({
+            "staff.yihu_image_file": res.tempFilePaths[0],
+            "staff.yihu_image": ''
+          });
 
+        wx.uploadFile({
+          url: url,
+          filePath: res.tempFilePaths[0],
+          name: 'file',
+          formData: {
+            'path': res.tempFilePaths[0]
+          },
+          success: function (ret) {
+            ret.data = JSON.parse(ret.data);
+            console.log(ret.data);
+
+            if (ret.data.code != 1) {
+              wx.showModal({
+                title: '图片上传失败',
+                content: ret.data.message,
+                showCancel: false,
+                success(res) {
+                  self.setData({
+                    "staff.yihu_image_file": '',
+                    "staff.yihu_image": ''
+                  });
+                }
+              });
+            } else {
+              self.setData({
+                "staff.yihu_image": ret.data.data.path
+              });
+            }
+          }
+        });
+      }
+    });
+  },
+  // 健康师证
+  onHealthImageChange: function () {
+    var self = this;
+    var url = app.util.url('Common/upload');
+    wx.chooseImage({
+      count: 1,
+      success: function (res) {
+        res.tempFilePaths[0],
+          self.setData({
+            "staff.health_image_file": res.tempFilePaths[0],
+            "staff.health_image": ''
+          });
+
+        wx.uploadFile({
+          url: url,
+          filePath: res.tempFilePaths[0],
+          name: 'file',
+          formData: {
+            'path': res.tempFilePaths[0]
+          },
+          success: function (ret) {
+            ret.data = JSON.parse(ret.data);
+            console.log(ret.data);
+
+            if (ret.data.code != 1) {
+              wx.showModal({
+                title: '图片上传失败',
+                content: ret.data.message,
+                showCancel: false,
+                success(res) {
+                  self.setData({
+                    "staff.health_image_file": '',
+                    "staff.health_image": ''
+                  });
+                }
+              });
+            } else {
+              self.setData({
+                "staff.health_image": ret.data.data.path
+              });
+            }
+          }
+        });
+      }
+    });
+  },
+  // 营养师证
+  onNourImageChange: function () {
+    var self = this;
+
+    var url = app.util.url('Common/upload');
+
+    wx.chooseImage({
+      count: 1,
+      success: function (res) {
+        res.tempFilePaths[0],
+          self.setData({
+            "staff.nourishment_image_file": res.tempFilePaths[0],
+            "staff.nourishment_image": ''
+          });
+
+        wx.uploadFile({
+          url: url,
+          filePath: res.tempFilePaths[0],
+          name: 'file',
+          formData: {
+            'path': res.tempFilePaths[0]
+          },
+          success: function (ret) {
+            ret.data = JSON.parse(ret.data);
+            console.log(ret.data);
+
+            if (ret.data.code != 1) {
+              wx.showModal({
+                title: '图片上传失败',
+                content: ret.data.message,
+                showCancel: false,
+                success(res) {
+                  self.setData({
+                    "staff.nourishment_image_file": '',
+                    "staff.nourishment_image": ''
+                  });
+                }
+              });
+            } else {
+              self.setData({
+                "staff.nourishment_image": ret.data.data.path
+              });
+            }
+          }
+        });
+      }
+    });
+  },
+  // 其他证件
+  onOtherImageChange: function () {
+    var self = this;
+
+    var url = app.util.url('Common/upload');
+
+    wx.chooseImage({
+      count: 1,
+      success: function (res) {
+        res.tempFilePaths[0],
+          self.setData({
+            "staff.other_image_file": res.tempFilePaths[0],
+            "staff.other_image": ''
+          });
+
+        wx.uploadFile({
+          url: url,
+          filePath: res.tempFilePaths[0],
+          name: 'file',
+          formData: {
+            'path': res.tempFilePaths[0]
+          },
+          success: function (ret) {
+            ret.data = JSON.parse(ret.data);
+            console.log(ret.data);
+
+            if (ret.data.code != 1) {
+              wx.showModal({
+                title: '图片上传失败',
+                content: ret.data.message,
+                showCancel: false,
+                success(res) {
+                  self.setData({
+                    "staff.other_image_file": '',
+                    "staff.other_image": ''
+                  });
+                }
+              });
+            } else {
+              self.setData({
+                "staff.other_image": ret.data.data.path
+              });
+            }
+          }
+        });
+      }
+    });
+  },
   onXieyiChange: function (e) {
     this.setData({
       is_xieyi: !this.data.is_xieyi
@@ -254,6 +442,11 @@ Page({
     var self = this;
 console.log(self.data.addressData);
     if (!self.data.addressData?.address) {
+        return wx.showToast({
+            title: '请选择地址',
+            icon: 'none',
+            duration: 2000
+          });
       return
     }
 
@@ -466,6 +659,9 @@ console.log(self.data.addressData);
           }
         })
         console.log('------',self.addressData);
+      },
+      fail:res=>{
+          console.log(res,'cs');
       }
     })
   },

@@ -32,10 +32,9 @@ page{background:#F4F4F4;}
 .serv-intro{font-size:26rpx;color:#999999;width:350rpx;overflow: hidden;white-space: nowrap;text-overflow:ellipsis}
 .serv-price{font-size:34rpx !important;font-weight:bold;color:#0bb684;}
 .serv-unit{color:#0bb684;}
-.hosp-intro {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.whiteWrap {
+  margin: 20rpx;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  background: #fff;
 }

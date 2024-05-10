@@ -123,6 +123,7 @@ Page({
             success(res) {
               // 定位成功，获取最近的店，并提示是否切换
               //self.main_load(false);
+              console.log(res,'cs-----------cs');
 
               app.util.request({
                 url: 'Index/location',
@@ -164,7 +165,7 @@ Page({
             },
             fail(res) {
               console.log("fail");
-              console.log(res);
+              console.log(res,'fail------------fail');
               // 定位失败，获取默认的店，并提示是否切换
               //self.main_load(false);
             }

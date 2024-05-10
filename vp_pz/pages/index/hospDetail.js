@@ -157,9 +157,8 @@ Page({
 
     // 前往医院详情
     toIntro:function(e){
-      console.log(12);
       wx.navigateTo({
-          url: '../index/hospDetail?svid='+e.currentTarget.dataset.svid+'&hid='+this.data.hospital.id
+          url: './hospDetail/?id='+this.data.hospital.id
       })
   },
     // 医院导航

@@ -16,6 +16,7 @@ Page({
      */
     onLoad: function (options) {
         var self=this;
+        console.log('url---',app.appinfo.approot + '/index/vppz/Web/index?appid='+ app.appinfo.appid);
 
         app.util.getUserInfo(function (response) {
             self.setData({
@@ -29,7 +30,8 @@ Page({
                     });
 
                     self.setData({
-                        url:app.appinfo.approot + '/index/vppz/Web/index?appid='+ app.appinfo.appid//;app.util.url('Index/index')+'&m=' + app.mdName
+                        url:app.appinfo.approot + '/index/vppz/Web/index?appid='+ app.appinfo.appid
+                        //;app.util.url('Index/index')+'&m=' + app.mdName
 
                     });
             });

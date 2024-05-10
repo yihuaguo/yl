@@ -10,13 +10,32 @@ Page({
     search: '',
     currentTab: 1, // 1 2 3 4
     list: [],
-    meAddressData: {}
+    meAddressData: {},
+    aid: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    console.log(this);
+    var self = this;
+    var aid = '';
+    if (options.scene) {
+      var scene = options.scene.split('_');
+      aid = scene[0] ? scene[0] : '';
+    } else {
+      aid = options.aid ? options.aid : '';
+    }
+
+    // 如果没有传入aid，则默认进入上次的aid，上次的aid在app.mdInit函数中更新保存
+    if (!aid) {
+      aid = wx.getStorageSync('VP_AID');
+    }
+
+    self.setData({
+      aid: aid
+    });
     this.getListData(1, 1)
   },
 
@@ -71,6 +90,7 @@ Page({
 
   getListData: function (current, tab, name = '') {
     var self = this;
+    let aid = self.data.aid;
     wx.getLocation({
       type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，可以指定返回的坐标类型
       success: (res) => {
@@ -80,7 +100,8 @@ Page({
           url: 'peihu/list',
           data: {
             name,
-            sort: tab
+            sort: tab,
+            aid: aid
           },
           success(res) {
             const list = res.data?.data?.list || [];

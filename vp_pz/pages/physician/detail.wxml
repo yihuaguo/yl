@@ -28,7 +28,7 @@
     <view class="servicewBox">
       <text class="contentTitle">服务项目</text>
       <view class="card" wx:for="{{service || []}}" wx:key="index">
-        <view class="cardHeaderBox">
+        <view bindtap="toService" data-svid="{{item.id}}" class="cardHeaderBox">
           <image class="cardImage" src='{{item.icon_image_url}}' />
           <view class="cardInfo">
             <view class="cardTitle">{{item.name}}</view>
@@ -39,7 +39,7 @@
             </view>
           </view>
         </view>
-        <view class="cardBtn" data-svid="{{item.id}}" bindtap="toService">预约</view>
+        <view class="cardBtn" data-svid="{{item.id}}" bindtap="toService2">预约</view>
       </view>
     </view>
   </view>
