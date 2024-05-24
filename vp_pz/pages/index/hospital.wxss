@@ -39,3 +39,10 @@ page{background:#F4F4F4;}
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.priceo{
+  font-size:10rpx;
+  color:gray;
+	text-decoration: line-through;
+	margin-right: 15rpx;
+}

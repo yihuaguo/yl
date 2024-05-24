@@ -18,8 +18,8 @@ Page({
 
     _serviceModal: false,
 
-    // is_xieyi: false
-    is_xieyi: true,
+    is_xieyi: false,
+    // is_xieyi: true,
     phone: '',
     demand: '', //服务需求
     address: '',
@@ -57,6 +57,7 @@ Page({
   },
   onLoad: function (options) {
     var self = this;
+    console.log('onload options:',options);
     if (options.obj) {
       let obj = JSON.parse(decodeURIComponent(options.obj));
       console.log(obj, 'cs');
@@ -195,25 +196,25 @@ Page({
   },
 
   // 填写收货地址
-  onAddressChange: function () {
-    const self = this;
-    wx.chooseAddress({
-      success(res) {
-        self.setData({
-          "order.address": {
-            'userName': res.userName,
-            'postalCode': res.postalCode,
-            'provinceName': res.provinceName,
-            'cityName': res.cityName,
-            'countyName': res.countyName,
-            'detailInfo': res.detailInfo,
-            'nationalCode': res.nationalCode,
-            'telNumber': res.telNumber
-          }
-        });
-      }
-    })
-  },
+  // onAddressChange: function () {
+  //   const self = this;
+  //   wx.chooseAddress({
+  //     success(res) {
+  //       self.setData({
+  //         "order.address": {
+  //           'userName': res.userName,
+  //           'postalCode': res.postalCode,
+  //           'provinceName': res.provinceName,
+  //           'cityName': res.cityName,
+  //           'countyName': res.countyName,
+  //           'detailInfo': res.detailInfo,
+  //           'nationalCode': res.nationalCode,
+  //           'telNumber': res.telNumber
+  //         }
+  //       });
+  //     }
+  //   })
+  // },
 
   onPriceChange: function (e) {
     this.setData({
@@ -231,6 +232,7 @@ Page({
 
   serviceSave: function (e) {
     var self = this;
+    console.log('service save:',e);
 
     if (self.data._is_saving) {
       return;
@@ -251,8 +253,10 @@ Page({
     order.service_code = this.data.service.code;
     order.service_name = this.data.service.name;
     order.service_stype = this.data.service.stype;
-    order.address = this.data.address;
     order.hid = this.data.hid;
+    order.address = {
+      address: this.data.address
+    };
 
     console.log('order:', order);
 
@@ -299,22 +303,19 @@ Page({
 
       // 接送地址验证
       if (this.data.service.stype == 15) {
-        if (!e.detail.value.address) {
+        if (!this.data.address) {
           return wx.showToast({
             title: '请填写就诊人所在地址',
             icon: 'none',
             duration: 2000
           });
         }
-        order.address = {
-          address: e.detail.value.address
-        };
       }
     }
 
     // 收件地址验证
     if (this.data.service.stype == 30 || this.data.service.stype == 40) {
-      if (!order.address) {
+      if (!this.data.address) {
         return wx.showToast({
           title: '请选择收件信息',
           icon: 'none',
@@ -340,16 +341,13 @@ Page({
       order.client_idcard = this.data.client.idcard;
 
       // 服务地址验证
-      if (!e.detail.value.address) {
+      if (!this.data.address) {
         return wx.showToast({
           title: '请填写服务地址',
           icon: 'none',
           duration: 2000
         });
       }
-      order.address = {
-        address: e.detail.value.address
-      };
     }
 
 

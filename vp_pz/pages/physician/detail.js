@@ -123,13 +123,13 @@ Page({
     //     '&dId=' + this.data?.pzId + '&nickname=' + this.data.userData.nickname
     // })
     wx.navigateTo({
-      url: '../newDetail/newDetail?id=' + e.currentTarget.dataset.svid + '&hid=' + this.data.userData.id +
+      url: '../newDetail/newDetail?id=' + e.currentTarget.dataset.svid +
         '&dId=' + this.data?.pzId + '&nickname=' + this.data.userData.nickname
     })
   },
   toService2: function (e) {
     wx.navigateTo({
-      url: '../index/service?svid=' + e.currentTarget.dataset.svid + '&hid=' + this.data.userData.id +
+      url: '../index/service?svid=' + e.currentTarget.dataset.svid +
         '&dId=' + this.data?.pzId + '&nickname=' + this.data.userData.nickname
     })
     // wx.navigateTo({

@@ -12,7 +12,8 @@
             {{detail.intro}}
         </view>
         <view class="price">
-            {{detail.priceo}}<text class="unit">元/次</text>
+            <text class="priceo" wx:if="{{detail.price3 != detail.priceo}}">{{detail.price3}}元/次</text>
+						{{detail.priceo}}<text class="unit">元/次</text>
         </view>
     </view>
     <view class="whiteWrap">
